@@ -1,0 +1,24 @@
+
+syntax = "proto3";
+
+package otp_app_package;
+
+service OtpApp {
+    rpc sendRequest (mobileNo) returns (status) {}
+    rpc validateCode (validateMsg) returns (status) {}
+}
+
+message mobileNo {
+    string mobileNo = 1;
+}
+
+message status {
+    string status = 1;
+}
+
+
+message validateMsg {
+    string mobileNo = 1;
+    string code = 2 ;
+}
+

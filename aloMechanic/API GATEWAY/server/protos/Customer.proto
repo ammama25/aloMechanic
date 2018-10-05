@@ -1,0 +1,57 @@
+
+syntax = "proto3";
+
+package customer_app_package;
+
+service CustomerApp {
+    rpc listCustomers (CustomerEmpty) returns (Customers) {}
+    rpc createCustomer (Customer) returns (DbCustomer) {}
+    rpc getCustomer (User_M) returns (DbCustomer) {}
+    rpc deleteCustomer (CustomerId) returns (response) {}
+    rpc updateCustomer (DbCustomer) returns (DbCustomer) {}
+
+}
+
+message Customers {
+    repeated DbCustomer customers = 1;
+}
+
+message Customer {
+    string mobileNo = 1;
+    string firstname = 2;
+    string lastname = 3;
+    string password = 4;
+    string email = 5;
+
+}
+
+message DbCustomer {
+    string id = 1;
+    string mobileNo = 2;
+    string firstname = 3;
+    string lastname = 4;
+    string password = 5;
+    string email = 6;
+    bool is_active = 7;
+}
+
+
+message CustomerId {
+    string mobileNo= 1;
+   
+}
+
+
+
+message User_M {
+    string mobileNo= 1;
+    string password= 2;
+}
+
+message CustomerEmpty {
+
+}
+
+message response {
+    string status = 1  ;
+}
