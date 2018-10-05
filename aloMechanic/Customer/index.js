@@ -1,13 +1,14 @@
+import app from './config/express';
 import logger from './config/log4js';
+import config from './config/env';
 import db from './config/sequelize';
 const grpc = require('grpc');
 const loader = require('@grpc/proto-loader');
-const CustomerAppHandler = require('./server/controllers/Customer');
+const CustomerAppHandler = require('./server/controllers/grpc_customer');
 
 db.sequelize.sync().then(() => {
-    logger.info('DB is connected');
+    console.log('DB is connected');
 });
-
 
 const PATH = '127.0.0.1:8083';
 

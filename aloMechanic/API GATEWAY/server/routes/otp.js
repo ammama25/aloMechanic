@@ -8,6 +8,6 @@ router.route('/')
 
     .post(otpCtrl.request)
 
-    .put(otpCtrl.validate , authCtrl.generateOtpToken);
+    .put(otpCtrl.validate ,authCtrl.generateOtpToken);
 
 export default router;

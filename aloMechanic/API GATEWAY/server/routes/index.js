@@ -1,6 +1,7 @@
 import express from 'express';
 import customer from './customer';
-import otp from './otp'
+import otp from './otp';
+import login from './login';
 
 const router = express.Router();
 
@@ -20,6 +21,8 @@ router.get('/api-status', (req, res) => {
 
 router.use('/customers', customer);
 router.use('/otp', otp);
+router.use('/login', login);
+
 
 
 export default router;

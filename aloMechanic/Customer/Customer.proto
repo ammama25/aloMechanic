@@ -4,9 +4,9 @@ syntax = "proto3";
 package customer_app_package;
 
 service CustomerApp {
-    rpc listCustomers (CustomerEmpty) returns (Customers) {}
+    rpc listCustomer (CustomerEmpty) returns (Customers) {}
     rpc createCustomer (Customer) returns (DbCustomer) {}
-    rpc getCustomer (User_M) returns (DbCustomer) {}
+    rpc getCustomer (Customer_M) returns (DbCustomer) {}
     rpc deleteCustomer (CustomerId) returns (response) {}
     rpc updateCustomer (DbCustomer) returns (DbCustomer) {}
 
@@ -22,7 +22,7 @@ message Customer {
     string lastname = 3;
     string password = 4;
     string email = 5;
-
+    
 }
 
 message DbCustomer {
@@ -37,14 +37,11 @@ message DbCustomer {
 
 
 message CustomerId {
-    string mobileNo= 1;
-   
+    string mobileNo = 1;
 }
 
-
-
-message User_M {
-    string mobileNo= 1;
+message Customer_M {
+    string mobileNo = 1;
     string password= 2;
 }
 

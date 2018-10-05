@@ -9,15 +9,19 @@ module.exports = (sequelize, DataTypes) => {
         },
         mobileNo:{
             type:DataTypes.STRING,
-            required:true
+            required:true,
+            unique: true
+
         },
         firstname: {
             type: DataTypes.STRING,
-            required: true
+            required: true,
+          
         },
         lastname: {
             type: DataTypes.STRING,
-            required: true
+            required: true,
+         
         },
         password: {
             type: DataTypes.STRING,
@@ -34,3 +38,4 @@ module.exports = (sequelize, DataTypes) => {
     });
     return customer;
 };
+

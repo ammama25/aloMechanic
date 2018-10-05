@@ -1,31 +1,11 @@
+const env = require('../../config/env/development')
+const grpcSetup = require('../../config/grpc')
+const bindPath = env.CUSTOMER_SERVER_ADDRESS;
+const protoAddress = './server/protos/Customer.proto';
 const grpc = require('grpc');
-const loader = require('@grpc/proto-loader');
-const bindPath = '127.0.0.1:8083';
 
-
-
-function get(req,res,next) {
-  console.log("get");
-  loader.load('./server/protos/Customer.proto')
-      .then((packageDefinition) => {
-          const Package = grpc.loadPackageDefinition(packageDefinition);
-          const Client = Package.customer_app_package.CustomerApp;
-          const client = new Client(bindPath, grpc.credentials.createInsecure());
-          client.listCustomers({}, function (err, customers) {
-            if (err) {
-                return console.log(err);
-            }
-            console.log('users:');
-            console.log(customers);
-            return res.json(customers);
-          });
-      });
-}
-
-function createcustomer(req,res,next) {
-    loader.load('./Customer.proto')
-    .then((packageDefinition) => {
-        const Package = grpc.loadPackageDefinition(packageDefinition);
+function register(req,res,next) {
+    grpcSetup(protoAddress ,function(Package){
         const Client = Package.customer_app_package.CustomerApp;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
         client.createCustomer({
@@ -33,81 +13,49 @@ function createcustomer(req,res,next) {
             firstname: req.body.firstname ,
             lastname: req.body.lastname ,
             password: req.body.password ,
-            email: req.body.email , 
-           } , function (err , resp) {
+            email: req.body.email  
+           } , function (err , customer) {
             if(err){
-                next()
+                next(err)
             }
             else {
-                return res.json(resp);
+                return res.json(customer);
             }
         })
     });
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
-//login
-function customerfinder(req, res ,next)
+function login(req, res ,next)
 {
-
-
- loader.load('./Customer.proto')
-    .then((packageDefinition) => {
-   
-        const Package = grpc.loadPackageDefinition(packageDefinition);
+    grpcSetup(protoAddress ,function(Package){
         const Client = Package.customer_app_package.CustomerApp;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-
- client.getCustomer({mobileNo: req.body.mobileNo , password: req.body }, function (err , res) {
-           
-            console.log(res);
+        client.getCustomer({mobileNo: req.body.mobileNo , password: req.body.password }, function (err , customer) {
+            console.log(customer);
+            return res.json(customer)
         })
-
-
     });
-    return res.json(req.dbuser); //??
-
-
 }
 
-////////////////////////////////////////////////////////////////////////////////////////////
-
-
-
-function updatecustomer(req, res ,next)
+function update(req, res ,next)
 {
-
-    loader.load('./Customer.proto')
-    .then((packageDefinition) => {
-   
-        const Package = grpc.loadPackageDefinition(packageDefinition);
+    grpcSetup(protoAddress ,function(Package){
         const Client = Package.customer_app_package.CustomerApp;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-
-
-           client.updateCustomer({mobileNo:  req.body.mobileNo ,firstname:req.body.firstname} , function (err , res) {
-            console.log(res)
+        client.updateCustomer({mobileNo:  req.body.mobileNo ,firstname:req.body.firstname} , function (err , customer) {
+            res.json(customer)
         })
     });
-   
-
-}
-////////////////////////////////////////////////////////////////////////////////////////
-function deletecustomer(req, res ,next)
-{
-    
- loader.load('./Customer.proto')
- .then((packageDefinition) => {
-
-     const Package = grpc.loadPackageDefinition(packageDefinition);
-     const Client = Package.customer_app_package.CustomerApp;
-     const client = new Client(bindPath, grpc.credentials.createInsecure());
-     client.deleteCustomer({mobileNo: req.body.mobileNo } , function (err , res) {
-            console.log(res)
-        })
-
- });
-
 }
 
-export default{get , createcustomer, updatecustomer ,deletecustomer,customerfinder };
+function remove(req, res ,next) {
+    grpcSetup(protoAddress ,function(Package){
+         const Client = Package.customer_app_package.CustomerApp;
+         const client = new Client(bindPath, grpc.credentials.createInsecure());
+         client.deleteCustomer({mobileNo: req.body.mobileNo } , function (err , status) {
+             res.json(status)
+         })
+    });
+}
+
+export default{register ,update ,remove ,login };

@@ -5,6 +5,9 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.default = {
     env: 'development',
+    NODE_PORT: 3000,
+    jwtSecret: 'mozi-amoo',
+    jwtDuration: '24 hours',
     DATABASE_NAME: process.env.DATABASE_NAME || 'aloMechanic',
     DATABASE_HOST: process.env.DATABASE_HOST || 'localhost',
     DATABASE_USERNAME: process.env.DATABASE_USERNAME || "ammama",

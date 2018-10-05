@@ -28,7 +28,6 @@ function generateLoginToken(req, res, next) {
         email : req.body.email,
         firstname : req.body.firstname,
         lastname : req.body.lastname,
-        is_active : req.body.is_active,
         recieveFrom : 'login'
     };
     const jwtData = {
@@ -59,7 +58,7 @@ function validateLoginToken(req , res , next) {
     jwt.verify(req.headers.token, secret, function(err, decoded) {
         if(!err){
             if (decoded.recieveFrom == 'login') {
-                if(decoded.mobileNo == req.body.mobileNo) {
+                if(decoded.id == req.params.customerId) {
                     req.valiadte = "ok"
                     return next()
                 }

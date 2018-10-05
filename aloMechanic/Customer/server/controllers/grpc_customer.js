@@ -1,27 +1,21 @@
 const db = require('../../config/sequelize');
-const customer = db.customer;
-
-
+const customer=db.customer;
 
 function login_load(call , callback) {
+    customer.findOne({where:{mobile:call.request.mobile}}).then(
+        customer.findOne({where:{password:call.request.password}}).then(
+            customers => {
+                callback(customers)
+            })
+    )
+}
 
-    customer.findOne({where:{mobileNo:call.request.mobileNo} && { password:call.request.password} }).then(customers => {
+function load(call , callback) {
+    customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
         callback(customers)
      
     })
-
 }
-
-
-function load(call , callback) {
-
-    customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(users => {
-        callback(users)
-     
-    })
-
-}
-
 
 function grpcMaker(obj , status , cb ){
     var res = {
@@ -30,47 +24,48 @@ function grpcMaker(obj , status , cb ){
         firstname: obj.firstname ,
         lastname: obj.lastname ,
         password: obj.password ,
-        email: obj.email ,
-        is_active: obj.is_active
+        email: obj.email 
     }
     cb(res)
 }
 
 class CustomerAppHandler {
-    
-    listCustomers(_, callback) {
+    listCustomer(_, callback) {
         console.log("grpc success///");
         customer.findAll()
-        .then(users => {
-            callback(null , {users});
+        .then(customers => {
+            console.log({customers})
+            callback(null , {customers});
         })
     }
 
     createCustomer(call ,callback) {
+        console.log(call.request);
         customer.create({
             mobileNo: call.request.mobileNo.toString(),
             firstname: call.request.firstname,
             lastname: call.request.lastname,
             password: call.request.password,
-            email:call.request.email ,
-            is_active : true
-      }).then(
+            email:call.request.email
+      })
+        .then(
             (savedCustomer) => {
-                grpcMaker(savedCustomer , "ok" , function (result) {
-                    console.log(result)
-                    return callback(null , result)
+                grpcMaker(savedCustomer , "OK" , function (result) {
+                callback(null , result)
                 })
-            }
-        )
+        })
+        .catch(function(err) {
+            console.log(err);
+        });
 
     }
 
 
-    getUser(call , callback) {
-
-        login_load(call , function (user) {
-            if(user){
-                grpcMaker(user , "OK" , function (result) {
+    getCustomer(call , callback) {
+        console.log("login-time");
+        login_load(call , function (customer) {
+            if(customer){
+                grpcMaker(customer , "OK" , function (result) {
                     console.log(result)
                     callback(null, result)
                 })
@@ -83,10 +78,11 @@ class CustomerAppHandler {
     }
 
 
-    deleteUser(call , callback) {
-        load(call , function (user) {
-            if(user){
-                user.destroy()
+
+    deleteCustomer(call , callback) {
+        load(call , function (customer) {
+            if(customer){
+                customer.destroy()
                     .then(() => callback(null ,{status:"removed Successfuly"}))
                 }
             
@@ -98,16 +94,16 @@ class CustomerAppHandler {
 
     }
 
-    updateUser(call , callback) {
+    updateCustomer(call , callback) {
 
 
         console.log(call)
 
-        load(call , function (user) {
-            if(user){  
-                Object.assign(user, call.request);
-                user.save() 
-                    .then((savedUser) =>  grpcMaker(savedUser , "OK" , function (result) {
+        load(call , function (customer) {
+            if(customer){  
+                Object.assign(customer, call.request);
+                customer.save() 
+                    .then((savedCustomer) =>  grpcMaker(savedCustomer , "OK" , function (result) {
                         callback(null ,result)
                     }));
             }

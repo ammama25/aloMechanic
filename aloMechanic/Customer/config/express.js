@@ -6,7 +6,7 @@ import path from 'path';
 import uuid from 'uuid';
 import bodyParser from 'body-parser';
 import expressValidation from 'express-validation';
-import routes from '../server/routes';
+// import routes from '../server/routes';
 import logger from './log4js';
 
 const logRoot = path.join(__dirname, '../../log');
@@ -75,8 +75,8 @@ app.use((req, res, next) => {
     next();
 });
 
-// mount all routes on /api path
-app.use('/api', routes);
+// // mount all routes on /api path
+// app.use('/api', routes);
 
 // express-validation provides a middleware function that can validate the request payload data given a set of rules provided by us.
 app.use((err, req, res, next) => {
