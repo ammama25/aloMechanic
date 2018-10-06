@@ -6,7 +6,7 @@ const customer=db.customer;
 
 function login_load(call , callback) {
 
-    customer.findOne({where:{mobile:call.request.mobile}}).then( customers => {
+    customer.findOne({where:{mobileNo:call.request.mobileNo}}).then( customers => {
         console.log(customers);
         if (!customers) {
             console.log("a");
@@ -29,7 +29,7 @@ function login_load(call , callback) {
 
 function load(call , callback) {
 
-    customer.findOne({where:{mobile:call.request.mobile}}).then(customers => {
+    customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
         callback(customers)
      
     })
@@ -43,7 +43,7 @@ function load(call , callback) {
 function grpcMaker(obj , status , cb ){
     var res = {
         id : obj.id ,
-        mobile: obj.mobile ,
+        mobileNo: obj.mobileNo ,
         firstname: obj.firstname ,
         lastname: obj.lastname ,
         password: obj.password ,
@@ -72,7 +72,7 @@ class CustomerAppHandler {
 
         console.log("ta inja");
         customer.create({
-          mobile: call.request.mobile,
+            mobileNo: call.request.mobileNo,
           firstname: call.request.firstname,
           lastname: call.request.lastname,
           password:call.request.password,

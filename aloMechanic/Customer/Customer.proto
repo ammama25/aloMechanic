@@ -17,7 +17,7 @@ message Customers {
 }
 
 message Customer {
-    string mobile = 1;  
+    string mobileNo = 1;
     string firstname = 2;
     string lastname = 3;
     string password = 4;
@@ -27,25 +27,25 @@ message Customer {
 
 message DbCustomer {
     string id = 1;
-    string mobile = 2;
+    string mobileNo = 2;
     string firstname = 3;
     string lastname = 4;
     string password = 5;
     string email = 6;
     bool is_active = 7;
-    string status = 8; 
+    string status = 8 ;
 }
 
 
 message CustomerId {
-    string mobile= 1;
+    string mobileNo = 1;
    
 }
 
 
 
 message Customer_M {
-    string mobile= 1;
+    string mobileNo = 1;
     string password= 2;
 }
 
