@@ -73,10 +73,10 @@ class CustomerAppHandler {
         console.log("ta inja");
         customer.create({
             mobileNo: call.request.mobileNo,
-          firstname: call.request.firstname,
-          lastname: call.request.lastname,
-          password:call.request.password,
-          email:call.request.email
+            firstname: call.request.firstname,
+            lastname: call.request.lastname,
+            password:call.request.password,
+            email:call.request.email
       })
         .then(
 
