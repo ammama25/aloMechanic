@@ -6,9 +6,15 @@ const grpc = require('grpc');
 const loader = require('@grpc/proto-loader');
 const CustomerAppHandler = require('./server/controllers/grpc_customer');
 
+
+
+
 db.sequelize.sync().then(() => {
-    console.log('DB is connected');
+    app.listen(config.NODE_PORT, () => {
+        logger.info(`API Server started and listening on port ${config.NODE_PORT}`);
+    });
 });
+
 
 const PATH = '127.0.0.1:8083';
 
@@ -27,3 +33,5 @@ const createServer = function (bindPath, handler) {
 
 createServer(PATH, new CustomerAppHandler);
 
+
+// export default app;

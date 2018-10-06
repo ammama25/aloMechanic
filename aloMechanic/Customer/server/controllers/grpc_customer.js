@@ -1,26 +1,49 @@
+const Customer = require('../models/customer');
 const db = require('../../config/sequelize');
+const env = require('../../config/env/development')
 const customer=db.customer;
 
+
 function login_load(call , callback) {
-    customer.findOne({where:{mobile:call.request.mobile}}).then(
-        customer.findOne({where:{password:call.request.password}}).then(
-            customers => {
-                callback(customers)
-            })
-    )
+
+    customer.findOne({where:{mobile:call.request.mobile}}).then( customers => {
+        console.log(customers);
+        if (!customers) {
+            console.log("a");
+            callback(null,err)
+         
+        } else if (!(customers.validPassword(call.request.password))) {
+            console.log("b");
+            callback(null,{status:"wrong password"})
+
+            
+        } else {
+            console.log("c");
+            callback(customers);
+          
+        }
+    });
+
 }
 
+
 function load(call , callback) {
-    customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
+
+    customer.findOne({where:{mobile:call.request.mobile}}).then(customers => {
         callback(customers)
      
     })
+
 }
+
+
+
+
 
 function grpcMaker(obj , status , cb ){
     var res = {
         id : obj.id ,
-        mobileNo: obj.mobileNo ,
+        mobile: obj.mobile ,
         firstname: obj.firstname ,
         lastname: obj.lastname ,
         password: obj.password ,
@@ -30,39 +53,59 @@ function grpcMaker(obj , status , cb ){
 }
 
 class CustomerAppHandler {
+    
     listCustomer(_, callback) {
+
         console.log("grpc success///");
         customer.findAll()
         .then(customers => {
             console.log({customers})
             callback(null , {customers});
+         
         })
+
+
     }
 
     createCustomer(call ,callback) {
-        console.log(call.request);
+        customer.get
+
+        console.log("ta inja");
         customer.create({
-            mobileNo: call.request.mobileNo.toString(),
-            firstname: call.request.firstname,
-            lastname: call.request.lastname,
-            password: call.request.password,
-            email:call.request.email
+          mobile: call.request.mobile,
+          firstname: call.request.firstname,
+          lastname: call.request.lastname,
+          password:call.request.password,
+          email:call.request.email
       })
         .then(
-            (savedCustomer) => {
-                grpcMaker(savedCustomer , "OK" , function (result) {
-                callback(null , result)
-                })
-        })
-        .catch(function(err) {
-            console.log(err);
-        });
 
-    }
+            (savedCustomer) => {
+        
+                if(!savedCustomer)
+                {
+                    callback(null,{status:"customer sabt nashod"})
+                }
+                else{
+                    grpcMaker(savedCustomer , "OK" , function (result) {
+                        callback(null , result)
+                })
+            }
+            })
+    .catch(
+        function(err) {
+        // print the error details
+        console.log("omid shams /////////////////////");
+     
+        callback(null,{status:"customer sabt nashod"})
+
+    });
+
+}
 
 
     getCustomer(call , callback) {
-        console.log("login-time");
+            console.log("login-time");
         login_load(call , function (customer) {
             if(customer){
                 grpcMaker(customer , "OK" , function (result) {

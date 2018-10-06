@@ -23,5 +23,4 @@ db.sequelize = sequelize;
 
 //Models/tables
 db.customer = require('../server/models/customer')(sequelize, _sequelize2.default);
-
 module.exports = db;
