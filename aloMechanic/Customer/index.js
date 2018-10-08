@@ -10,9 +10,7 @@ const CustomerAppHandler = require('./server/controllers/grpc_customer');
 
 
 db.sequelize.sync().then(() => {
-    app.listen(config.NODE_PORT, () => {
-        logger.info(`API Server started and listening on port ${config.NODE_PORT}`);
-    });
+    logger.info(`API Server started and listening on port ${config.NODE_PORT}`);
 });
 
 

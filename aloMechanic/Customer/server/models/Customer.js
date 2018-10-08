@@ -9,7 +9,7 @@ module.exports = (sequelize, DataTypes) => {
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
-        mobile:{
+        mobileNo:{
             type:DataTypes.STRING,
             required:true,
             unique: true

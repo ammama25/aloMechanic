@@ -22,6 +22,7 @@ function load(call , callback) {
 class AddressAppHandler {
 
     registerAddress(call ,callback) {
+        console.log(call)
         customerAddress.create({
             customerId: call.request.customerId,
             districtId: call.request.districtId,
@@ -46,16 +47,19 @@ class AddressAppHandler {
                     }));
             }
             else {
-                callback("address peida nashod",null))
+                callback("address peida nashod",null)
             }
         })
     }
 
     getAllAddresses(call , callback) {
+        customerAddress.findAll({where:{customerId:call.request.customerId}}).then(addresses => {
+            callback(null , {addresses})
 
+        })
     }
 }
 
-export default OtpAppHandler;
+export default AddressAppHandler;
 
 

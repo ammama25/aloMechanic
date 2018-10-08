@@ -21,7 +21,6 @@ function generateOtpToken(req, res, next) {
 }
 
 function generateLoginToken(req, res, next) {
-    console.log(req.body)
     const jwtPayload = {
         id : req.body.id,
         mobileNo : req.body.mobileNo,
@@ -46,7 +45,11 @@ function validateOtpToken(req , res , next) {
                     req.valiadte = "ok"
                     return next()
                 }
+                else
+                    res.send(401)
             }
+            else
+                res.send(401)
         }
         else {
             res.send(401)
@@ -62,6 +65,11 @@ function validateLoginToken(req , res , next) {
                     req.valiadte = "ok"
                     return next()
                 }
+                else
+                    res.send(401)
+            }
+            else {
+                res.send(401)
             }
         }
         else {

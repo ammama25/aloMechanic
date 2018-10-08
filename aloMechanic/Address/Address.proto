@@ -6,7 +6,7 @@ package address_app_package;
 service AddressApp {
     rpc registerAddress (address) returns (dbAddress) {}
     rpc updateAddress (address) returns (dbAddress) {}
-    rpc getAllAddresses (addressEmpty) returns (addresss) {}
+    rpc getAllAddresses (customerId) returns (addresss) {}
 }
 
 message addresss {
@@ -28,8 +28,8 @@ message dbAddress {
     string location = 5 ;
 }
 
-message addressEmpty {
-
+message customerId {
+    string customerId = 1;
 }
 
 

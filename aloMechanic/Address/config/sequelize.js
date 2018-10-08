@@ -70,4 +70,8 @@ db.city = require('../server/models/city')(sequelize, _sequelize2.default);
 db.district = require('../server/models/district')(sequelize, _sequelize2.default);
 db.customerAddress = require('../server/models/customerAddress')(sequelize, _sequelize2.default);
 
+db.district.belongsTo(db.city, {foreignKey: 'cityId'});
+// db.district.hasOne(db.city);
+
+
 module.exports = db;

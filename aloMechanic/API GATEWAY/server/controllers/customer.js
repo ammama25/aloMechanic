@@ -25,26 +25,37 @@ function register(req,res,next) {
     });
 }
 
-function login(req, res ,next)
-{
+function login(req, res ,next) {
     grpcSetup(protoAddress ,function(Package){
         const Client = Package.customer_app_package.CustomerApp;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
         client.getCustomer({mobileNo: req.body.mobileNo , password: req.body.password }, function (err , customer) {
-            console.log(customer);
-            return res.json(customer)
+            if(customer){
+                console.log(customer);
+                return next()
+            }
+            else
+                res.send("error in login")
         })
+        return next()
     });
 }
 
-function update(req, res ,next)
-{
+function update(req, res ,next) {
     grpcSetup(protoAddress ,function(Package){
         const Client = Package.customer_app_package.CustomerApp;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.updateCustomer({mobileNo:  req.body.mobileNo ,firstname:req.body.firstname} , function (err , customer) {
-            res.json(customer)
-        })
+        client.updateCustomer({
+            mobileNo: req.body.mobileNo,
+            firstname: req.body.firstname ,
+            lastname: req.body.lastname ,
+            password: req.body.password ,
+            email: req.body.email
+            } ,
+            function (err , customer) {
+                res.json(customer)
+            }
+        )
     });
 }
 
