@@ -4,10 +4,10 @@ import authCtrl from '../controllers/auth'
 
 const router = express.Router();
 
-router.route('/')
-
+router.route('/request')
     .post(otpCtrl.request)
 
+router.route('/validate')
     .put(otpCtrl.validate ,authCtrl.generateOtpToken);
 
 export default router;

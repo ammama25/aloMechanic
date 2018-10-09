@@ -9,7 +9,9 @@ service CustomerApp {
     rpc getCustomer (Customer_M) returns (DbCustomer) {}
     rpc deleteCustomer (CustomerId) returns (response) {}
     rpc updateCustomer (DbCustomer) returns (DbCustomer) {}
-
+    rpc registerAddress (address) returns (dbAddress) {}
+    rpc updateAddress (address) returns (dbAddress) {}
+    rpc getAllAddresses (customerId) returns (addresss) {}
 }
 
 message Customers {
@@ -22,7 +24,7 @@ message Customer {
     string lastname = 3;
     string password = 4;
     string email = 5;
-    
+
 }
 
 message DbCustomer {
@@ -33,15 +35,13 @@ message DbCustomer {
     string password = 5;
     string email = 6;
     bool is_active = 7;
+    string status = 8 ;
 }
-
 
 message CustomerId {
     string mobileNo = 1;
-   
+
 }
-
-
 
 message Customer_M {
     string mobileNo = 1;
@@ -54,4 +54,27 @@ message CustomerEmpty {
 
 message response {
     string status = 1  ;
+}
+
+message addresss {
+    repeated dbAddress addresses = 1;
+}
+
+message address {
+    string customerId = 1 ;
+    string districtId = 2 ;
+    string address = 3 ;
+    string location = 4 ;
+}
+
+message dbAddress {
+    string id = 1 ;
+    string customerId = 2 ;
+    string districtId = 3 ;
+    string address = 4 ;
+    string location = 5 ;
+}
+
+message customerId {
+    string customerId = 1;
 }

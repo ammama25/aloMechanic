@@ -1,6 +1,5 @@
 import express from 'express';
 import customer from '../controllers/customer';
-import address from '../controllers/address';
 import auth from '../controllers/auth'
 
 const router = express.Router();
@@ -8,17 +7,19 @@ const router = express.Router();
 router.route('/')
     .post(auth.validateOtpToken ,customer.register)
 
-router.route('/:customerId')
+router.route('/update')
     .put(auth.validateLoginToken ,customer.update)
+
+router.route('/delete')
     .delete(auth.validateLoginToken ,customer.remove);
 
-router.route('/:customerId/registerAddress')
-    .post(address.register)
+router.route('/registerAddress')
+    .post(auth.validateLoginToken ,customer.registerAddress)
 
-router.route('/:customerId/updateAddress')
-    .put(auth.validateLoginToken ,address.update)
+router.route('/updateAddress')
+    .put(auth.validateLoginToken ,customer.updateAddress)
 
-router.route('/:customerId/getAllAddresses')
-    .get(address.getAll)
+router.route('/getAllAddresses')
+    .get(auth.validateLoginToken ,customer.getAllAddresses)
 
 export default router;

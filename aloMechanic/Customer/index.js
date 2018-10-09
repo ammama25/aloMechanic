@@ -4,13 +4,10 @@ import config from './config/env';
 import db from './config/sequelize';
 const grpc = require('grpc');
 const loader = require('@grpc/proto-loader');
-const CustomerAppHandler = require('./server/controllers/grpc_customer');
-
-
-
+const CustomerAppHandler = require('./server/controllers/Customer');
 
 db.sequelize.sync().then(() => {
-    logger.info(`API Server started and listening on port ${config.NODE_PORT}`);
+    logger.info(`db is connected`);
 });
 
 

@@ -9,3 +9,9 @@ try {
 }catch (err) {
     console.log(err)
 }
+process.on('uncaughtException', function (err) {
+    console.log('Caught exception: ', err);
+});
+
+
+

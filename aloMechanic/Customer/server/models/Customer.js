@@ -1,5 +1,4 @@
 'use strict'
-var Sequelize = require('sequelize');
 var bcrypt = require('bcrypt');
 
 module.exports = (sequelize, DataTypes) => {
@@ -13,7 +12,6 @@ module.exports = (sequelize, DataTypes) => {
             type:DataTypes.STRING,
             required:true,
             unique: true
-
         },
         firstname: {
             type: DataTypes.STRING,
@@ -37,9 +35,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.BOOLEAN,
             defaultValue:true,
         }
-
-    
-    }, {
+    },
+    {
         hooks: {
           beforeCreate: (customer) => {
             const salt = bcrypt.genSaltSync();
@@ -53,11 +50,9 @@ module.exports = (sequelize, DataTypes) => {
         }   
     });
 
-    customer.prototype.validPassword=function(password){  
-      
-            return bcrypt.compareSync(password, this.password);
+    customer.prototype.validPassword=function(password){
+        return bcrypt.compareSync(password, this.password);
     }
-       
 
     return customer;
 };

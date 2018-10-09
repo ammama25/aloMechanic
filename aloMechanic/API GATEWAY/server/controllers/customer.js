@@ -31,13 +31,12 @@ function login(req, res ,next) {
         const client = new Client(bindPath, grpc.credentials.createInsecure());
         client.getCustomer({mobileNo: req.body.mobileNo , password: req.body.password }, function (err , customer) {
             if(customer){
-                console.log(customer);
-                return next()
+                req.body.id = customer.id
+                next()
             }
             else
                 res.send("error in login")
         })
-        return next()
     });
 }
 
@@ -69,4 +68,51 @@ function remove(req, res ,next) {
     });
 }
 
-export default{register ,update ,remove ,login };
+function registerAddress(req,res,next) {
+    grpcSetup(protoAddress ,function(Package){
+        const Client = Package.customer_app_package.CustomerApp;
+        const client = new Client(bindPath, grpc.credentials.createInsecure());
+        client.registerAddress({
+            customerId: req.query.customerId,
+            districtId: req.body.districtId,
+            address: req.body.address,
+            location: req.body.location
+        } , function (err , address) {
+            if(err){
+                next(err)
+            }
+            else {
+                return res.json(address);
+            }
+        })
+    });
+}
+
+function updateAddress(req, res ,next)
+{
+    grpcSetup(protoAddress ,function(Package){
+        const Client = Package.customer_app_package.CustomerApp;
+        const client = new Client(bindPath, grpc.credentials.createInsecure());
+        client.updateCustomer({
+            customerId: req.query.customerId,
+            districtId: req.body.districtId,
+            address: req.body.address,
+            location: req.body.location
+        } , function (err , address) {
+            res.json(address)
+        })
+    });
+}
+
+function getAllAddresses(req, res ,next) {
+    grpcSetup(protoAddress ,function(Package){
+        const Client = Package.customer_app_package.CustomerApp;
+        const client = new Client(bindPath, grpc.credentials.createInsecure());
+        client.getAllAddresses({customerId: req.query.customerId } , function (err , addresses) {
+            console.log(err)
+            res.json(addresses)
+        })
+    });
+}
+
+export default{register ,update ,remove ,login ,registerAddress ,updateAddress ,getAllAddresses };

@@ -22,7 +22,7 @@ function generateOtpToken(req, res, next) {
 
 function generateLoginToken(req, res, next) {
     const jwtPayload = {
-        id : req.body.id,
+        id : req.body.id ,
         mobileNo : req.body.mobileNo,
         email : req.body.email,
         firstname : req.body.firstname,
@@ -30,7 +30,7 @@ function generateLoginToken(req, res, next) {
         recieveFrom : 'login'
     };
     const jwtData = {
-      expiresIn: config.jwtDuration,
+        expiresIn: config.jwtDuration,
     };
 
     var token = jwt.sign(jwtPayload, secret, jwtData);
@@ -61,7 +61,8 @@ function validateLoginToken(req , res , next) {
     jwt.verify(req.headers.token, secret, function(err, decoded) {
         if(!err){
             if (decoded.recieveFrom == 'login') {
-                if(decoded.id == req.params.customerId) {
+                console.log(decoded)
+                if(decoded.id == req.query.customerId) {
                     req.valiadte = "ok"
                     return next()
                 }
