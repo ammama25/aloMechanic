@@ -61,7 +61,6 @@ function validateLoginToken(req , res , next) {
     jwt.verify(req.headers.token, secret, function(err, decoded) {
         if(!err){
             if (decoded.recieveFrom == 'login') {
-                console.log(decoded)
                 if(decoded.id == req.query.customerId) {
                     req.valiadte = "ok"
                     return next()

@@ -1,5 +1,7 @@
 const env = require('../../config/env/development')
 const grpcSetup = require('../../config/grpc')
+const db = require('../../config/sequelize');
+var sequelize = db.sequelize ;
 const bindPath = env.CUSTOMER_SERVER_ADDRESS;
 const protoAddress = './server/protos/Customer.proto';
 const grpc = require('grpc');
@@ -105,14 +107,27 @@ function updateAddress(req, res ,next)
 }
 
 function getAllAddresses(req, res ,next) {
-    grpcSetup(protoAddress ,function(Package){
-        const Client = Package.customer_app_package.CustomerApp;
-        const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.getAllAddresses({customerId: req.query.customerId } , function (err , addresses) {
-            console.log(err)
-            res.json(addresses)
+    // grpcSetup(protoAddress ,function(Package){
+    //     const Client = Package.customer_app_package.CustomerApp;
+    //     const client = new Client(bindPath, grpc.credentials.createInsecure());
+    //     client.getAllAddresses({customerId: req.query.customerId } , function (err , addresses) {
+    //         console.log(err)
+    //         res.json(addresses)
+    //     })
+    // });
+    sequelize.query("SELECT Customer.firstname , Customer.lastname , " +
+        " City.name as city, Dist.name as district, Address.address" +
+        " FROM dbo.customers Customer " +
+        " JOIN dbo.customerAddresses Address" +
+        " ON Customer.id = Address.customerId and Customer.id = :cid "+
+        " JOIN dbo.districts Dist ON Dist.id = Address.districtId " +
+        " JOIN dbo.cities City ON City.id = Dist.cityId " ,
+        { replacements: {cid : req.query.customerId}, type: sequelize.QueryTypes.SELECT })
+        .then(users => {
+            console.log(users)
+            res.json(users)
         })
-    });
+
 }
 
 export default{register ,update ,remove ,login ,registerAddress ,updateAddress ,getAllAddresses };
