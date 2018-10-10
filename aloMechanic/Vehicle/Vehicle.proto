@@ -1,0 +1,50 @@
+
+syntax = "proto3";
+
+package CustomerVehicle_app_package;
+
+service CustomerVehicleApp {
+    rpc getCustomerVehicle (customerId) returns (DbCustomerVehicle) {}
+    rpc createCustomerVehicle (CustomerVehicle) returns (DbCustomerVehicle) {}
+    rpc deleteCustomerVehicle (CustomerVehicleId) returns (response) {}
+    rpc updateCustomerVehicle (DbCustomerVehicle) returns (DbCustomerVehicle) {}
+
+}
+message customerVehicles {
+    repeated DbCustomerVehicle CustomerVehicle = 1;
+}
+
+message CustomerVehicle {
+    string vehicleId = 1;
+    string customerId = 2;
+    string plateNo = 3;
+    string color = 4;
+    string mileage = 5;
+    
+}
+
+message DbCustomerVehicle {
+    string id = 1;
+    string vehicleId = 2;
+    string customerId = 3;
+    string plateNo = 4;
+    string color = 5;
+    string mileage = 6;
+}
+
+
+message CustomerVehicleId {
+    string CustomerVehicleId = 1;
+   
+}
+
+message response {
+    string status = 1  ;
+}
+
+
+message customerId {
+    string customerId = 1;
+}
+
+
