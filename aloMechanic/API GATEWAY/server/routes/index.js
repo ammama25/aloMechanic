@@ -3,6 +3,7 @@ import customer from './customer';
 import otp from './otp';
 import login from './login';
 import vehicle from './Vehicle';
+import location from './location';
 
 const router = express.Router();
 
@@ -24,5 +25,6 @@ router.use('/customers', customer);
 router.use('/otp', otp);
 router.use('/login', login);
 router.use('/Vehicle',vehicle);
+router.use('/location',location);
 
 export default router;

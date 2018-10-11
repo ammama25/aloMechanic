@@ -27,4 +27,6 @@ db.city = require('../server/models/City')(sequelize, _sequelize2.default);
 db.district = require('../server/models/District')(sequelize, _sequelize2.default);
 db.customerAddress = require('../server/models/CustomerAddress')(sequelize, _sequelize2.default);
 
+db.customer.hasMany(db.customerAddress, {foreignKey: 'customerId' , sourceKey: 'id'})
+
 module.exports = db;

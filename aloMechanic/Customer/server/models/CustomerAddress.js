@@ -10,10 +10,10 @@ module.exports = (sequelize, DataTypes) => {
         customerId: {
             type: DataTypes.UUID,
             required: true ,
-            references: {
-                model: "Customer",
-                key: "id"
-            }
+            // references: {
+            //     model: "customer",
+            //     key: "id"
+            // }
         },
         districtId: {
             type: DataTypes.INTEGER,

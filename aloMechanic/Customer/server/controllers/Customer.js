@@ -102,10 +102,10 @@ class CustomerAppHandler {
     }
 
     updateAddress(call , callback) {
-        load(call , function (address) {
+        customerAddress.findOne({where:{id:call.request.id , customerId:call.request.customerId}}).then(address => {
             if(address){
                 Object.assign(address, call.request);
-                customerAddress.save()
+                address.save()
                     .then((savedCustomer) =>  callback(null, savedCustomer));
             }
             else {
@@ -124,7 +124,6 @@ class CustomerAppHandler {
             callback(null , {addresses})
         })
     }
-    
 }
 
 export default CustomerAppHandler;

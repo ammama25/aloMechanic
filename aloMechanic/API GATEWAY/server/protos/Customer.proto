@@ -10,7 +10,7 @@ service CustomerApp {
     rpc deleteCustomer (CustomerId) returns (response) {}
     rpc updateCustomer (DbCustomer) returns (DbCustomer) {}
     rpc registerAddress (address) returns (dbAddress) {}
-    rpc updateAddress (address) returns (dbAddress) {}
+    rpc updateAddress (dbAddress) returns (dbAddress) {}
     rpc getAllAddresses (customerId) returns (addresss) {}
 }
 
