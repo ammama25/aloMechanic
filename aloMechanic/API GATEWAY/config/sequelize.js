@@ -21,10 +21,5 @@ var db = {};
 db.Sequelize = _sequelize2.default;
 db.sequelize = sequelize;
 
-//Models/tables
-// db.customer = require('../server/models/Customer')(sequelize, _sequelize2.default);
-// db.city = require('../server/models/City')(sequelize, _sequelize2.default);
-// db.district = require('../server/models/District')(sequelize, _sequelize2.default);
-// db.customerAddress = require('../server/models/CustomerAddress')(sequelize, _sequelize2.default);
 
 module.exports = db;
