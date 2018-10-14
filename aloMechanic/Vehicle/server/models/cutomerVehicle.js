@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4
         },
         vehicleId:{
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             required:true,
        
 

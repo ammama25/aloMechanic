@@ -1,19 +1,30 @@
 import express from 'express';
 import otpCtrl from '../controllers/otp';
-import vehicle from '../controllers/Vehicle';
-import authctrl from '../controllers/auth';
+import auth from '../controllers/auth';
+import Vehicle from '../controllers/Vehicle';
 
 const router = express.Router();
 
-router.route('/')
+router.route('/getCustomerVehicle')
+     .get(auth.validateLoginToken ,Vehicle.getCustomerVehicle)
 
-    .get(vehicle.getCustomerVehicle)
+router.route('/registerCustomerVehicle')
+    .post(Vehicle.registerCustomerVehicle)
 
-    .post(vehicle.registerCustomerVehicle)
+router.route('/updateCustomerVehicle')
+    .put( Vehicle.update)
+    
+router.route('/removeCustomerVehicle')
+    .delete(Vehicle.remove)
 
-    .put(vehicle.update)
 
-    .delete(vehicle.remove)
+    router.route('/getallvehicle')
+    .get(Vehicle.getallvehicle)
+
+    router.route('/getallbrands')
+
+    router.route('/getallmodels')
+
 
 
 export default router;

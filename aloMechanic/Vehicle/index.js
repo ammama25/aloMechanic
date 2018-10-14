@@ -4,7 +4,7 @@ import env from './config/env/development';
 import db from './config/sequelize';
 const grpc = require('grpc');
 const loader = require('@grpc/proto-loader');
-const CustomerVehicleAppHandler = require('./server/controllers/grpc_customerVehicle');
+const CustomerVehicleAppHandler = require('./server/controllers/customerVehicle');
 
 
 db.sequelize.sync().then(() => {

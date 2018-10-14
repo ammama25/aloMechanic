@@ -1,5 +1,9 @@
+
+
 const env = require('../../config/env/development')
 const grpcSetup = require('../../config/grpc')
+const db = require('../../config/sequelize');
+var sequelize = db.sequelize ;
 const bindPath = env.VEHICLE_SERVER_ADRESSS;
 const protovehicle = './server/protos/Vehicle.proto';
 const grpc = require('grpc');
@@ -52,7 +56,17 @@ function update(req, res ,next)
     grpcSetup(protovehicle ,function(Package){
         const Client = Package.CustomerVehicle_app_package.CustomerVehicleApp;  
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.updateCustomerVehicle({customerId: req.customerId ,request:req.body} , function (err , customervehicle) {
+        client.updateCustomerVehicle(
+            {
+                customerId: req.body.customerId ,
+                vehicleId:req.body.vehicleId,
+                plateNo:req.body.plateNo,
+                color:req.body.color,
+                mileage:req.body.mileage,
+            }
+
+            , function (err , customervehicle) {
+                console.log(customervehicle);
             res.json(customervehicle)
         })
     });
@@ -62,10 +76,38 @@ function remove(req, res ,next) {
     grpcSetup(protovehicle ,function(Package){
          const Client = Package.CustomerVehicle_app_package.CustomerVehicleApp;
          const client = new Client(bindPath, grpc.credentials.createInsecure());
-         client.deleteCustomerVehicle({customerId:req.customerId } , function (err , status) {
+         client.deleteCustomerVehicle({customerId:req.body.customerId } , function (err , status) {
              res.json(status)
          })
     });
 }
 
-export default{registerCustomerVehicle ,update ,remove ,getCustomerVehicle};
+
+
+
+function getallvehicle(req,res,next)
+{
+    sequelize.query("SELECT vehicle.modelId , vehicle.brandId , " +
+    " vehicle.type as type, vehicle.year as year  " +
+    " FROM dbo.vehicles vehicle " +
+    " JOIN dbo.models model ON model.id = vehicle.modelId " +
+    " JOIN dbo.brands brand ON brand.id = vehicle.brandId " ,
+    {type: sequelize.QueryTypes.SELECT })
+    .then(vehicle => {
+        console.log(vehicle)
+        res.json(vehicle)
+    })
+
+
+}
+function getallmodels(req,res,next)
+{
+
+    
+}
+function getallbrands(req,res,next)
+{
+
+    
+}
+export default{registerCustomerVehicle ,update ,remove ,getCustomerVehicle,getallbrands,getallmodels,getallvehicle};

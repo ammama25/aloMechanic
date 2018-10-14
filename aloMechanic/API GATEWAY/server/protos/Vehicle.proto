@@ -6,8 +6,8 @@ package CustomerVehicle_app_package;
 service CustomerVehicleApp {
     rpc getCustomerVehicle (customerId) returns (DbCustomerVehicle) {}
     rpc createCustomerVehicle (CustomerVehicle) returns (DbCustomerVehicle) {}
-    rpc deleteCustomerVehicle (CustomerVehicleId) returns (response) {}
-    rpc updateCustomerVehicle (DbCustomerVehicle) returns (DbCustomerVehicle) {}
+    rpc deleteCustomerVehicle (customerId) returns (response) {}
+    rpc updateCustomerVehicle (CustomerVehicle) returns (DbCustomerVehicle) {}
 
 }
 message customerVehicles {

@@ -3,11 +3,11 @@
 
 
 module.exports = (sequelize, DataTypes) => {
-    const brand = sequelize.define('vehicle', {
+    const brand = sequelize.define('brand', {
         id: {
             type: DataTypes.INTEGER,
             primaryKey: true,
-            defaultValue: DataTypes.UUIDV4
+           
         },
         name:{
             type: DataTypes.STRING,

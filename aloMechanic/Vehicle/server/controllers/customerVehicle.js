@@ -7,36 +7,9 @@ const customerVehicle=db.customerVehicle;
 
 function load(call , callback) {
     customerVehicle.findOne({where:{customerId:call.request.customerId}}).then( customerVehicles => {
-        console.log(customerVehicles);
-        if (!customerVehicles) {
-            console.log("a");
-            callback(null,err)
-         
-        }   
-        else {
-            console.log("c");
-            callback(customerVehicles);
-          
-        }
+        callback(customerVehicles)
     });
 }
-
-
-
-
-
-function grpcMaker(obj , cb ){
-    var res = {
-        id : obj.id ,
-        vehicleId: obj.vehicleId ,
-        customerId: obj.customerId ,
-        plateNo: obj.plateNo ,
-        color: obj.color ,
-        mileage: obj.mileage 
-    }
-    cb(res)
-}
-
 class CustomerVehicleAppHandler {
     
  
@@ -50,26 +23,25 @@ class CustomerVehicleAppHandler {
             color:call.request.color,
             mileage:call.request.mileage
       }).then((savedCustomerVehicle) => {
-                console.log("wlcto the register177")
+                console.log("wlc to the register")
                 if(!savedCustomerVehicle)
                 {
                     callback(null,{status:"customerVehicle sabt nashod"})
                 }
                 else{
                     
-                    grpcMaker(savedCustomerVehicle , "OK" , function (result) {
-                        callback(null , result)
-                })
-            }
+                  
+                        callback(null ,savedCustomerVehicle )
+                }
             })
-    .catch(
-        function(err) {
-        // print the error details
-        console.log("omid shams /////////////////////");
+    // .catch(
+    //     function(err) {
+    //     // print the error details
+    //     console.log("omid shams /////////////////////");
      
-        callback(null,{status:"customerVehicle sabt nashod"})
+    //     callback(null,{status:"customerVehicle sabt nashod"})
 
-    });
+    // });
 
 }
 
@@ -78,11 +50,11 @@ class CustomerVehicleAppHandler {
             console.log("login-time");
         load(call , function (customerVehicle) {
             if(customerVehicle){
-                grpcMaker(customerVehicle , "OK" , function (result) {
-                    console.log(result)
-                    callback(null, result)
-                })
+               
+                    callback(null, customerVehicle)
             }
+                
+            
             else {
                 callback(null ,{status:"customerVehicle not found"})
             }
@@ -93,6 +65,7 @@ class CustomerVehicleAppHandler {
 
 
     deleteCustomerVehicle(call , callback) {
+        console.log("remove-time");
         load(call , function (customerVehicle) {
             if(customerVehicle){
                 customerVehicle.destroy()
@@ -110,18 +83,18 @@ class CustomerVehicleAppHandler {
     updateCustomerVehicle(call , callback) {
 
 
-        console.log(call)
+        console.log("update-time")
 
         load(call , function (customerVehicle) {
             if(customerVehicle){  
                 Object.assign(customerVehicle, call.request);
                 customerVehicle.save() 
-                    .then((savedCustomerVehicle) =>  grpcMaker(savedCustomerVehicle , "OK" , function (result) {
-                        callback(null ,result)
-                    }));
+                    .then((savedCustomerVehicle) =>{
+                        callback(null ,savedCustomerVehicle)
+                    });
             }
             else {
-                callback(null ,{status:"customerVehicle not found"})
+                callback(null ,{status:"customer not found"})
             }
 
         })
