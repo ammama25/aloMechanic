@@ -87,7 +87,7 @@ function remove(req, res ,next) {
 
 function getallvehicle(req,res,next)
 {
-    sequelize.query("SELECT vehicle.modelId , vehicle.brandId , " +
+    sequelize.query("SELECT mode , , " +
     " vehicle.type as type, vehicle.year as year  " +
     " FROM dbo.vehicles vehicle " +
     " JOIN dbo.models model ON model.id = vehicle.modelId " +
@@ -100,14 +100,19 @@ function getallvehicle(req,res,next)
 
 
 }
-function getallmodels(req,res,next)
+function getall(req,res,next)
+{
+    sequelize.query("SELECT * FROM  dbo.vehicle,dbo.model,dbo.brand ",
+    {type: sequelize.QueryTypes.SELECT })
+    .then(vehicle => {
+        console.log(vehicle)
+        res.json(vehicle)
+    })
+    
+}
+function getallbrands_models(req,res,next)
 {
 
     
 }
-function getallbrands(req,res,next)
-{
-
-    
-}
-export default{registerCustomerVehicle ,update ,remove ,getCustomerVehicle,getallbrands,getallmodels,getallvehicle};
+export default{registerCustomerVehicle ,update ,remove ,getCustomerVehicle,getallbrands,getall,getallbrands_models,getallvehicle};

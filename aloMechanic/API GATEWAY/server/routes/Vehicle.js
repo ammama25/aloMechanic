@@ -21,9 +21,9 @@ router.route('/removeCustomerVehicle')
     router.route('/getallvehicle')
     .get(Vehicle.getallvehicle)
 
-    router.route('/getallbrands')
+    router.route('/getall')
 
-    router.route('/getallmodels')
+    router.route('/getallbrands_models')
 
 
 
