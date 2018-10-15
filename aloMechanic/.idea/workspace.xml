@@ -1,15 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b14f9fea-a171-4c25-bafd-ad4f20e8ad55" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/API GATEWAY/config/env/development.js" beforeDir="false" afterPath="$PROJECT_DIR$/API GATEWAY/config/env/development.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API GATEWAY/server/controllers/Vehicle.js" beforeDir="false" afterPath="$PROJECT_DIR$/API GATEWAY/server/controllers/Vehicle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/API GATEWAY/server/routes/Vehicle.js" beforeDir="false" afterPath="$PROJECT_DIR$/API GATEWAY/server/routes/Vehicle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vehicle/config/env/development.js" beforeDir="false" afterPath="$PROJECT_DIR$/Vehicle/config/env/development.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vehicle/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Vehicle/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vehicle/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Vehicle/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Vehicle/server/controllers/customerVehicle.js" beforeDir="false" afterPath="$PROJECT_DIR$/Vehicle/server/controllers/customerVehicle.js" afterDir="false" />
-    </list>
+    <list default="true" id="b14f9fea-a171-4c25-bafd-ad4f20e8ad55" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -189,7 +181,7 @@
       <path value="$PROJECT_DIR$/Vehicle/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="-8" />
     <option name="y" value="2" />
     <option name="width" value="1346" />
