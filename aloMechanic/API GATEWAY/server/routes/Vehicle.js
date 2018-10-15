@@ -6,16 +6,16 @@ import Vehicle from '../controllers/Vehicle';
 const router = express.Router();
 
 router.route('/getCustomerVehicle')
-     .get(auth.validateLoginToken ,Vehicle.getCustomerVehicle)
+     .get(Vehicle.getCustomerVehicle)
 
 router.route('/registerCustomerVehicle')
     .post(Vehicle.registerCustomerVehicle)
 
 router.route('/updateCustomerVehicle')
-    .put( Vehicle.update)
+    .put( auth.validateLoginToken ,Vehicle.update)
     
 router.route('/removeCustomerVehicle')
-    .delete(Vehicle.remove)
+    .delete(auth.validateLoginToken ,Vehicle.remove)
 
 
     router.route('/getallvehicle')

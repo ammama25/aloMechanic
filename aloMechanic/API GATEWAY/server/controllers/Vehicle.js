@@ -34,20 +34,7 @@ function registerCustomerVehicle(req,res,next) {
 }
 
 
-function getCustomerVehicle(req, res ,next)
-{
-    console.log("ta inja");
-   
-    grpcSetup(protovehicle ,function(Package){
-        console.log("tainja");
-        const Client = Package.CustomerVehicle_app_package.CustomerVehicleApp;
-        const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.getCustomerVehicle({customerId:req.customerId }, function (err , customervehicle) {
-            console.log(customervehicle);
-            return res.json(customervehicle)
-        })
-    });
-}
+
 
 
 
@@ -82,12 +69,29 @@ function remove(req, res ,next) {
     });
 }
 
+function getCustomerVehicle(req, res ,next)
+{
+    sequelize.query("SELECT  Customer.firstname ,Customer.lastname,brand.name ," +
+        " Customervehicle.plateNo,Customervehicle.color,Customervehicle.mileage,model.name " +
+        " FROM dbo.CustomerVehicles Customervehicle" +
+        " JOIN dbo.customers Customer "+
+        " ON Customer.id = Customervehicle.customerId and Customer.id = :cid "+
+        " JOIN dbo.vehicles vehicle ON vehicle.id = Customervehicle.vehicleId  " +
+        " JOIN dbo.models model ON model.id = vehicle.modelId " +
+        " JOIN dbo.brands brand ON brand.id = vehicle.brandId " ,
+        {replacements: {cid : req.query.customerId},type: sequelize.QueryTypes.SELECT })
+        .then(Customervehicle => {
+            console.log(Customervehicle)
+            res.json(Customervehicle)
+        })
 
+
+}
 
 
 function getallvehicle(req,res,next)
 {
-    sequelize.query("SELECT mode , , " +
+    sequelize.query("SELECT model.name ,brand.name , " +
     " vehicle.type as type, vehicle.year as year  " +
     " FROM dbo.vehicles vehicle " +
     " JOIN dbo.models model ON model.id = vehicle.modelId " +
@@ -100,19 +104,5 @@ function getallvehicle(req,res,next)
 
 
 }
-function getall(req,res,next)
-{
-    sequelize.query("SELECT * FROM  dbo.vehicle,dbo.model,dbo.brand ",
-    {type: sequelize.QueryTypes.SELECT })
-    .then(vehicle => {
-        console.log(vehicle)
-        res.json(vehicle)
-    })
-    
-}
-function getallbrands_models(req,res,next)
-{
 
-    
-}
-export default{registerCustomerVehicle ,update ,remove ,getCustomerVehicle,getallbrands,getall,getallbrands_models,getallvehicle};
+export default{registerCustomerVehicle ,update ,remove ,getCustomerVehicle,getallvehicle};

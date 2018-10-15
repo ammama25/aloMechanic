@@ -46,23 +46,6 @@ class CustomerVehicleAppHandler {
 }
 
 
-    getCustomerVehicle(call , callback) {
-            console.log("login-time");
-        load(call , function (customerVehicle) {
-            if(customerVehicle){
-               
-                    callback(null, customerVehicle)
-            }
-                
-            
-            else {
-                callback(null ,{status:"customerVehicle not found"})
-            }
-
-        })
-    }
-
-
 
     deleteCustomerVehicle(call , callback) {
         console.log("remove-time");
