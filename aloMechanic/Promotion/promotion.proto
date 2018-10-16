@@ -1,0 +1,23 @@
+
+syntax = "proto3";
+
+package promotion_app_package;
+
+service promotion {
+    rpc get_promotion (msg) returns (status) {}
+  
+}
+
+message msg {
+
+    string customerId = 1;
+    string categoryId = 2 ;
+    string serviceId = 3 ;
+    string productId = 4 ; 
+}
+
+message status {
+    string status = 1;
+    
+}
+

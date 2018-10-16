@@ -29,4 +29,4 @@ db.customerAddress = require('../server/models/CustomerAddress')(sequelize, _seq
 
 db.customer.hasMany(db.customerAddress, {foreignKey: 'customerId' , sourceKey: 'id'})
 
-module.exports = db;
+module.exports = db;    

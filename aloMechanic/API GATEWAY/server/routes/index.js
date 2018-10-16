@@ -5,6 +5,10 @@ import login from './login';
 import vehicle from './Vehicle';
 import location from './location';
 import product from './product';
+import promotion  from './promotion';
+import grassAmount from './grassAmount';
+import productandservice  from './productandservice';
+
 
 const router = express.Router();
 
@@ -28,5 +32,10 @@ router.use('/login', login);
 router.use('/Vehicle',vehicle);
 router.use('/location',location);
 router.use('/products',product);
+router.use("/grassAmount",grassAmount);
+router.use("/promotion",promotion);
+router.use("/productandservice",productandservice);
+
+
 
 export default router;
