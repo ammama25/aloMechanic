@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="b14f9fea-a171-4c25-bafd-ad4f20e8ad55" name="Default Changelist" comment="" />
+    <list default="true" id="b14f9fea-a171-4c25-bafd-ad4f20e8ad55" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrassAmount/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/GrassAmount/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/GrassAmount/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/GrassAmount/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product and Service/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Product and Service/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Product and Service/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Product and Service/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Promotion/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/Promotion/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Promotion/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/Promotion/package.json" afterDir="false" />
+    </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -15,7 +23,7 @@
     <session id="-1662938736">
       <usages-collector id="statistics.lifecycle.project">
         <counts>
-          <entry key="project.closed" value="1" />
+          <entry key="project.closed" value="2" />
           <entry key="project.open.time.1" value="1" />
           <entry key="project.open.time.3" value="1" />
           <entry key="project.opened" value="2" />
@@ -49,11 +57,11 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file pinned="false" current-in-tab="false">
+      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/API GATEWAY/server/controllers/Vehicle.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="86" selection-start-line="86" selection-end-line="86" />
+            <state relative-caret-position="306">
+              <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
             </state>
           </provider>
         </entry>
@@ -108,7 +116,7 @@
         <entry file="file://$PROJECT_DIR$/API GATEWAY/config/env/development.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="238">
-              <caret line="14" selection-start-line="14" selection-end-line="14" selection-end-column="2" />
+              <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="2" />
             </state>
           </provider>
         </entry>
@@ -123,15 +131,6 @@
         </entry>
       </file>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/queries/productInsert.sql">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="34">
-              <caret line="2" column="101" selection-start-line="2" selection-start-column="66" selection-end-line="2" selection-end-column="101" />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/API GATEWAY/server/routes/Vehicle.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="170">
@@ -169,19 +168,24 @@
   <component name="NodeModulesDirectoryManager">
     <handled-path value="$PROJECT_DIR$/API GATEWAY/node_modules" />
     <handled-path value="$PROJECT_DIR$/Customer/node_modules" />
+    <handled-path value="$PROJECT_DIR$/GrassAmount/node_modules" />
     <handled-path value="$PROJECT_DIR$/Otp/node_modules" />
+    <handled-path value="$PROJECT_DIR$/Product and Service/node_modules" />
+    <handled-path value="$PROJECT_DIR$/Promotion/node_modules" />
     <handled-path value="$PROJECT_DIR$/Vehicle/node_modules" />
   </component>
   <component name="NodePackageJsonFileManager">
     <packageJsonPaths>
       <path value="$PROJECT_DIR$/API GATEWAY/package.json" />
       <path value="$PROJECT_DIR$/Customer/package.json" />
+      <path value="$PROJECT_DIR$/GrassAmount/package.json" />
       <path value="$PROJECT_DIR$/Otp/package.json" />
       <path value="$PROJECT_DIR$/Product and Service/package.json" />
+      <path value="$PROJECT_DIR$/Promotion/package.json" />
       <path value="$PROJECT_DIR$/Vehicle/package.json" />
     </packageJsonPaths>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="-8" />
     <option name="y" value="2" />
     <option name="width" value="1346" />
@@ -201,55 +205,6 @@
               <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
               <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
             </path>
-            <path>
-              <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="API GATEWAY" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="API GATEWAY" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="API GATEWAY" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="API GATEWAY" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="routes" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="Vehicle" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="Vehicle" type="462c0819:PsiDirectoryNode" />
-              <item name="config" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="Vehicle" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="aloMechanic" type="b2602c69:ProjectViewProjectNode" />
-              <item name="aloMechanic" type="462c0819:PsiDirectoryNode" />
-              <item name="Vehicle" type="462c0819:PsiDirectoryNode" />
-              <item name="server" type="462c0819:PsiDirectoryNode" />
-              <item name="controllers" type="462c0819:PsiDirectoryNode" />
-            </path>
           </expand>
           <select />
         </subPane>
@@ -258,7 +213,7 @@
   </component>
   <component name="PropertiesComponent">
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/GrassAmount" />
     <property name="nodejs_interpreter_path.stuck_in_default_project" value="undefined stuck path" />
     <property name="nodejs_npm_path_reset_for_default_project" value="true" />
     <property name="nodejs_package_manager_path" value="npm" />
@@ -286,17 +241,18 @@
       <option name="presentableId" value="Default" />
       <updated>1539605444225</updated>
       <workItem from="1539605447023" duration="3135000" />
-      <workItem from="1539609041690" duration="1797000" />
+      <workItem from="1539609041690" duration="4147000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="4932000" />
+    <option name="totallyTimeSpent" value="7282000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1382" height="744" extended-state="6" />
+    <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
+      <window_info active="true" content_ui="combo" id="Project" order="0" visible="true" weight="0.25" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" side_tool="true" />
       <window_info anchor="bottom" id="Message" order="0" />
@@ -308,7 +264,7 @@
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Docker" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Version Control" order="8" show_stripe_button="false" />
-      <window_info active="true" anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3295082" />
+      <window_info anchor="bottom" id="Terminal" order="9" visible="true" weight="0.3295082" />
       <window_info anchor="bottom" id="Event Log" order="10" side_tool="true" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
@@ -371,7 +327,7 @@
     <entry file="file://$PROJECT_DIR$/API GATEWAY/config/env/development.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="238">
-          <caret line="14" selection-start-line="14" selection-end-line="14" selection-end-column="2" />
+          <caret line="17" selection-start-line="17" selection-end-line="17" selection-end-column="2" />
         </state>
       </provider>
     </entry>
@@ -406,13 +362,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/API GATEWAY/server/controllers/Vehicle.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="86" selection-start-line="86" selection-end-line="86" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/API GATEWAY/server/routes/Vehicle.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="170">
@@ -420,6 +369,13 @@
           <folding>
             <element signature="e#0#30#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/API GATEWAY/server/controllers/Vehicle.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="306">
+          <caret line="84" column="37" selection-start-line="84" selection-start-column="37" selection-end-line="84" selection-end-column="37" />
         </state>
       </provider>
     </entry>

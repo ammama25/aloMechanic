@@ -17,7 +17,7 @@ message msg {
 }
 
 message status {
-    string status = 1;
+    int32  amount = 1;
     
 }
 

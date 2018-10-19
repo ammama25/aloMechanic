@@ -16,11 +16,11 @@ class promotionAmountAppHandler{
     
      get_promotion(call,callback)
     {
-    console.log("get_time")
+        console.log("get_time")
 
-    callback(null,{"status":random()});
-    console.log(random());
-  
+        callback(null,{"amount":random()});
+        console.log(random());
+
 
 
 }
