@@ -11,16 +11,15 @@ function random()
 
 
 
-class promotionAmountAppHandler{
+class grossAmountAppHandler{
 
     
-     getDiscount(call,callback) {
+     getGrossAmount(call,callback) {
         console.log("get_time")
 
         callback(null,{"amount":random()});
-
-     }
+    }
 
 }
 
-export default promotionAmountAppHandler;
+export default grossAmountAppHandler;

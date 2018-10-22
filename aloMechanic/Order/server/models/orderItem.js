@@ -33,7 +33,8 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.INTEGER
         },
         totalPrice: {
-            type: DataTypes.STRING
+            type: DataTypes.STRING,
+            required: true
         }
     });
     return orderItem;

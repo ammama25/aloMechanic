@@ -4,7 +4,7 @@ syntax = "proto3";
 package promotion_app_package;
 
 service promotion {
-    rpc get_promotion (msg) returns (status) {}
+    rpc getDiscount (msg) returns (amount) {}
 
 }
 
@@ -16,7 +16,7 @@ message msg {
     string productId = 4 ;
 }
 
-message status {
+message amount {
     int32  amount = 1;
 
 }

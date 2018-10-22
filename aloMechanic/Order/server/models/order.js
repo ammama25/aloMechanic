@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
             required: true
         },
         grossAmount: {
-            type: DataTypes.INTEGER
+            type: DataTypes.INTEGER ,
+            required: true
         },
         totalPrice: {
             type: DataTypes.INTEGER,
@@ -36,6 +37,18 @@ module.exports = (sequelize, DataTypes) => {
         },
         paidAmount: {
             type: DataTypes.INTEGER
+        },
+        scheduleDate: {
+            type: DataTypes.STRING,
+            notNull: true
+        },
+        scheduleFrom: {
+            type: DataTypes.INTEGER,
+            required: true
+        },
+        scheduleThrough: {
+            type: DataTypes.INTEGER,
+            required: true
         }
     });
     return order;

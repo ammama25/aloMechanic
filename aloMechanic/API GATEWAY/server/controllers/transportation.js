@@ -8,9 +8,9 @@ function getgrassAmount(req,res,next) {
 
     console.log("tainja");
     grpcSetup(transportation ,function(Package){
-        const Client = Package.grassAmount_app_package.grassAmount;
+        const Client = Package.grossAmount_app_package.grossAmount;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.get_grassAmount({
+        client.getGrossAmount({
             productId: req.body.productId ,
             serviceId: req.body.serviceId ,
             categoryId: req.body.categoryId  

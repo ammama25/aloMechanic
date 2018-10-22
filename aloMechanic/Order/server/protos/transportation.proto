@@ -1,10 +1,10 @@
 
 syntax = "proto3";
 
-package grassAmount_app_package;
+package grossAmount_app_package;
 
-service grassAmount {
-    rpc get_grassAmount (msg) returns (status) {}
+service grossAmount {
+    rpc getGrossAmount (msg) returns (amount) {}
   
 }
 
@@ -15,8 +15,8 @@ message msg {
     string productId = 3 ; 
 }
 
-message status {
-    string status = 1;
+message amount {
+    string amount = 1;
     
 }
 

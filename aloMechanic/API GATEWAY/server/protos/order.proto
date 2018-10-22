@@ -35,7 +35,7 @@ message dbOrder {
 }
 
 message schduleData {
-    string Date    = 1 ;
+    string date    = 1 ;
     int32  from    = 2 ;
     int32  through = 3 ;
 

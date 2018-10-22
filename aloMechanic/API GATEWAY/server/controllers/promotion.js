@@ -9,11 +9,11 @@ function getpromotion(req,res,next) {
     grpcSetup(promotion ,function(Package){
         const Client = Package.promotion_app_package.promotion;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.get_promotion({
+        client.getDiscount({
             customerId: req.body.customerId,
             productId: req.body.productId ,
             serviceId: req.body.serviceId ,
-            categoryId: req.body.categoryId  
+            categoryId: req.body.categoryId
            } , function (err , promotion) {
             if(err){
                 next(err)

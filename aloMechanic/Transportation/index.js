@@ -3,7 +3,7 @@ import env from './config/env/development';
 import db from './config/sequelize';
 const grpc = require('grpc');
 const loader = require('@grpc/proto-loader');
-const grassAmountAppHandler = require('./server/controllers/grassAmount');
+const grossAmountAppHandler = require('./server/controllers/grossAmount');
 
 
 db.sequelize.sync().then(() => {
@@ -15,12 +15,10 @@ db.sequelize.sync().then(() => {
 const PATH = '127.0.0.1:8090';
 
 const createServer = function (bindPath, handler) {
-    console.log("tainja-1");
-    loader.load('grassAmount.proto')
+    loader.load('transportation.proto')
         .then((packageDefinition) => {
-            console.log("tainja");
             const Package = grpc.loadPackageDefinition(packageDefinition);
-            const service = Package.grassAmount_app_package.grassAmount.service;
+            const service = Package.grossAmount_app_package.grossAmount.service;
             const server = new grpc.Server();
             server.addService(service, handler);
             server.bind(bindPath, grpc.ServerCredentials.createInsecure());
@@ -29,7 +27,7 @@ const createServer = function (bindPath, handler) {
         });
 }
 
-createServer(PATH, new grassAmountAppHandler);
+createServer(PATH, new grossAmountAppHandler);
 
 
 // export default app;

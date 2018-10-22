@@ -10,7 +10,7 @@ function getprice(req,res,next) {
     grpcSetup(productandservice ,function(Package){
         const Client = Package.productandservice_app_package.productandservice;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.get_price({
+        client.getPricedItems({
             customerId: req.body.customerId,
             productId: req.body.productId ,
             serviceId: req.body.serviceId ,

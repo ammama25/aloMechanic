@@ -4,20 +4,31 @@ syntax = "proto3";
 package productandservice_app_package;
 
 service productandservice {
-    rpc get_price (msg) returns (status) {}
-  
+    rpc getPricedItems (items) returns (responseItems) {}
+
 }
 
-message msg {
-
-    string customerId = 1;
-    string categoryId = 2 ;
-    string serviceId = 3 ;
-    string productId = 4 ; 
+message item {
+    string categoryId = 1 ;
+    string serviceId  = 2 ;
+    string productId  = 3 ;
 }
 
-message status {
-    string status = 1;
-    
+message items {
+    repeated item items = 1 ;
+}
+
+message responseItem {
+    string categoryId    = 1 ;
+    string serviceId     = 2 ;
+    string productId     = 3 ;
+    string categoryPrice = 4 ;
+    string servicePrice  = 5 ;
+    string productPrice  = 6 ;
+    string totalPrice    = 7 ;
+}
+
+message responseItems {
+    repeated responseItem responseItems = 1 ;
 }
 
