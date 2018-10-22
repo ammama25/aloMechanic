@@ -124,6 +124,17 @@ class CustomerAppHandler {
             callback(null , {addresses})
         })
     }
+
+    getAddress(call , callback) {
+        customerAddress.findOne({
+                where: {
+                    id:call.request.addressId
+                }
+            }).then(address => {
+                console.log(address)
+                callback(null , address)
+        })
+    }
 }
 
 export default CustomerAppHandler;

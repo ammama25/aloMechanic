@@ -1,26 +1,27 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-    const customerAddress = sequelize.define('customerAddress', {
+    const orderHistory = sequelize.define('orderHistory', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
-        customerId: {
+        orderId: {
             type: DataTypes.UUID,
-            required: true 
-        },
-        districtId: {
-            type: DataTypes.INTEGER,
             required: true
         },
-        address: {
+        state:{
+            type: DataTypes.ENUM,
+            values: ["new", "cancel", "confirm", "done"],
+            required: true
+        },
+        desc: {
             type: DataTypes.STRING
         },
-        location: {
+        updatedBy: {
             type: DataTypes.STRING
-       }
+        }
     });
-    return customerAddress;
+    return orderHistory;
 };

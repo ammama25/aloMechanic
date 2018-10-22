@@ -1,6 +1,6 @@
 const env = require('../../config/env/development')
 const grpcSetup = require('../../config/grpc')
-const bindPath =env.GRASSAMOUNT_SERVER_ADDRESS;
+const bindPath =env.TRANSPORTATION_SERVER_ADDRESS;
 const transportation = './server/protos/transportation.proto';
 const grpc = require('grpc');
 

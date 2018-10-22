@@ -8,6 +8,7 @@ import product from './product';
 import promotion  from './promotion';
 import grassAmount from './transportation';
 import productandservice  from './productandservice';
+import order  from './order';
 
 
 const router = express.Router();
@@ -35,6 +36,7 @@ router.use('/products',product);
 router.use("/grassAmount",grassAmount);
 router.use("/promotion",promotion);
 router.use("/productandservice",productandservice);
+router.use("/order",order);
 
 
 

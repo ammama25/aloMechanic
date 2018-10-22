@@ -1,0 +1,53 @@
+
+syntax = "proto3";
+
+package order_app_package;
+
+service orderApp {
+    rpc placeOrder (order) returns (dbOrder) {}
+
+}
+
+message order {
+    string customerId             = 1 ;
+    string customerVehicle        = 2 ;
+    string promotion              = 3 ;
+    schduleData scheduling        = 4 ;
+    string address                = 5 ;
+    repeated orderItem orderItems = 6 ;
+}
+
+message dbOrder {
+    string id                     = 1 ;
+    string orderNo                = 2 ;
+    string customerId             = 3 ;
+    string customerVehicle        = 4 ;
+    string orderDate              = 6 ;
+    int32  grossAmount            = 7 ;
+    int32  totalPrice             = 8 ;
+    int32  discount               = 9 ;
+    int32  transportPrice         = 10 ;
+    int32  paidAmount             = 11 ;
+    string state                  = 12 ;
+    schduleData scheduling        = 13 ;
+    string address                = 14 ;
+    repeated orderItem orderItems = 15 ;
+}
+
+message schduleData {
+    string Date    = 1 ;
+    int32  from    = 2 ;
+    int32  through = 3 ;
+
+}
+
+message orderItem {
+    string categoryId    = 1 ;
+    string serviceId    = 2 ;
+    string productId    = 3 ;
+    int32  categoryPrice = 4 ;
+    int32  servicePrice = 5 ;
+    int32  productPrice = 6 ;
+    int32  totalPrice   = 7 ;
+}
+

@@ -1,15 +1,15 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-    const customerAddress = sequelize.define('customerAddress', {
+    const orderAddress = sequelize.define('orderAddress', {
         id: {
             type: DataTypes.UUID,
             primaryKey: true,
             defaultValue: DataTypes.UUIDV4
         },
-        customerId: {
+        orderId: {
             type: DataTypes.UUID,
-            required: true 
+            required: true
         },
         districtId: {
             type: DataTypes.INTEGER,
@@ -20,7 +20,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         location: {
             type: DataTypes.STRING
-       }
+        }
     });
-    return customerAddress;
+    return orderAddress;
 };

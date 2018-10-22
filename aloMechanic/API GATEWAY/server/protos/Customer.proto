@@ -12,6 +12,7 @@ service CustomerApp {
     rpc registerAddress (address) returns (dbAddress) {}
     rpc updateAddress (dbAddress) returns (dbAddress) {}
     rpc getAllAddresses (customerId) returns (addresss) {}
+    rpc getAddress (addressId) returns (dbAddress) {}
 }
 
 message Customers {
@@ -77,4 +78,8 @@ message dbAddress {
 
 message customerId {
     string customerId = 1;
+}
+
+message addressId {
+    string addressId = 1 ;
 }
