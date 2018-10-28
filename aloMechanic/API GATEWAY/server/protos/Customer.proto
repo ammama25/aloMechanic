@@ -17,6 +17,7 @@ service CustomerApp {
 
 message Customers {
     repeated DbCustomer customers = 1;
+    string err_status = 2;
 }
 
 message Customer {
@@ -25,7 +26,6 @@ message Customer {
     string lastname = 3;
     string password = 4;
     string email = 5;
-
 }
 
 message DbCustomer {
@@ -37,6 +37,7 @@ message DbCustomer {
     string email = 6;
     bool is_active = 7;
     string status = 8 ;
+    string err_status = 9;
 }
 
 message CustomerId {
@@ -55,6 +56,7 @@ message CustomerEmpty {
 
 message response {
     string status = 1  ;
+    string err_status = 2;
 }
 
 message addresss {
@@ -66,6 +68,7 @@ message address {
     string districtId = 2 ;
     string address = 3 ;
     string location = 4 ;
+    string err_status = 5 ; 
 }
 
 message dbAddress {
@@ -74,10 +77,12 @@ message dbAddress {
     string districtId = 3 ;
     string address = 4 ;
     string location = 5 ;
+    string err_status = 6 ;
 }
 
 message customerId {
     string customerId = 1;
+
 }
 
 message addressId {

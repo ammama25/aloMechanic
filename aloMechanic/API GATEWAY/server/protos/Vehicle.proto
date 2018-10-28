@@ -12,6 +12,7 @@ service CustomerVehicleApp {
 }
 message customerVehicles {
     repeated DbCustomerVehicle CustomerVehicle = 1;
+    string err_status = 2;
 }
 
 message CustomerVehicle {
@@ -30,6 +31,7 @@ message DbCustomerVehicle {
     string plateNo = 4;
     string color = 5;
     string mileage = 6;
+    string err_status = 7;
 }
 
 
@@ -40,6 +42,7 @@ message CustomerVehicleId {
 
 message response {
     string status = 1  ;
+    string err_status = 2;
 }
 
 

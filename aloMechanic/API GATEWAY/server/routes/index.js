@@ -6,7 +6,7 @@ import vehicle from './Vehicle';
 import location from './location';
 import product from './product';
 import promotion  from './promotion';
-import grassAmount from './transportation';
+import transportation from './transportation';
 import productandservice  from './productandservice';
 import order  from './order';
 
@@ -33,7 +33,7 @@ router.use('/login', login);
 router.use('/Vehicle',vehicle);
 router.use('/location',location);
 router.use('/products',product);
-router.use("/grassAmount",grassAmount);
+router.use("/transportation",transportation);
 router.use("/promotion",promotion);
 router.use("/productandservice",productandservice);
 router.use("/order",order);

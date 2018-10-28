@@ -18,6 +18,7 @@ message msg {
 
 message amount {
     int32  amount = 1;
+    string err_status = 2;
     
 }
 

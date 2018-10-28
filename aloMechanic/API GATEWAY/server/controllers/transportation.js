@@ -4,23 +4,28 @@ const bindPath =env.TRANSPORTATION_SERVER_ADDRESS;
 const transportation = './server/protos/transportation.proto';
 const grpc = require('grpc');
 
-function getgrassAmount(req,res,next) {
+function gettransportation(req,res,next) {
 
     console.log("tainja");
     grpcSetup(transportation ,function(Package){
-        const Client = Package.grossAmount_app_package.grossAmount;
+        const Client = Package.transportation_app_package.transportation;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.getGrossAmount({
+        client.gettransportation({
             productId: req.body.productId ,
             serviceId: req.body.serviceId ,
             categoryId: req.body.categoryId  
-           }, function (err ,_grassAmount){
+           }, function (err ,transportation){
             if(err){
-               coso.log("error");
+               console.log(err);
             }
             else {
-                console.log(_grassAmount.status);
-                return res.json(_grassAmount.status);
+
+               
+                    console.log(transportation);
+                    return res.json(transportation);
+
+             
+      
             }
         })
     });
@@ -29,4 +34,4 @@ function getgrassAmount(req,res,next) {
 
 
 
-export default{ getgrassAmount };
+export default{ gettransportation };

@@ -1,10 +1,10 @@
 
 syntax = "proto3";
 
-package grossAmount_app_package;
+package transportation_app_package;
 
-service grossAmount {
-    rpc getGrossAmount (msg) returns (amount) {}
+service transportation {
+    rpc gettransportation (msg) returns (amount) {}
   
 }
 
@@ -16,7 +16,7 @@ message msg {
 }
 
 message amount {
-    string amount = 1;
+    int32 amount = 1;
     
 }
 

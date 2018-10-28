@@ -1,89 +1,165 @@
 const db = require('../../config/sequelize');
 const customer = db.customer;
 const customerAddress = db.customerAddress;
+const validation =require('../../config/validation');
+ 
+let ref_validation = new validation.validation("mob-emial");
 
-function login_load(call , callback) {
-    customer.findOne({where:{mobileNo:call.request.mobileNo}}).then( customers => {
+
+
+
+function login_load(call  ,callback) {
+    customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
         if (!customers) {
-            callback(null,{status:"wrong password"})
+         err.message="wrong number";
+            console.log(err.message);
+            throw new Error(err);
+           // callback(err,{err_status:"wrong number"})
         }
         else if (!(customers.validPassword(call.request.password))) {
-            callback(null,{status:"wrong password"})
+          
+
+            err.message="wrong pass";
+            console.log(err.message);
+                throw new Error(err);
+           // callback(null,{err_status:"wrong password"})
+
         }
         else {
+
             callback(null, customers);
         }
-    });
+    })
+    .catch(
+
+        function(err) {
+
+          //  console.log(err)
+            callback(err,{err_status:"customer sabt nashod"})
+
+        }
+    );
 }
 
 function load(call , callback) {
+  
     customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
         callback(customers)
     })
-}
+    }
 
 class CustomerAppHandler {
 
     listCustomer(_, callback) {
+
         customer.findAll()
         .then(customers => {
-            console.log({customers})
-            callback(null , {customers});
+
+            if(!customers)
+            {
+            callback(new error("error"))
+
+
+            }
+            else{
+
+                console.log({customers})
+                callback(null , {customers});
+
+            }
+            
         })
     }
 
     createCustomer(call ,callback) {
-        customer.create({
-            mobileNo: call.request.mobileNo,
-            firstname: call.request.firstname,
-            lastname: call.request.lastname,
-            password:call.request.password,
-            email:call.request.email
-        }).then((savedCustomer) => {
-            if(!savedCustomer) {
-                callback(null,{status:"customer sabt nashod"})
-            }
-            else{
-                callback(null, savedCustomer)
-            }
-        }).catch(
-        function(err) {
-            console.log(err)
-            callback(null,{status:"customer sabt nashod"})
-        });
+
+        var mail=ref_validation.validateEmail(call.request.email);
+        var mobile=ref_validation.validatephonenumber(call.request.mobileNo);
+
+
+
+        console.log(mail && mobile);
+        if(mail && mobile )
+        {
+
+            customer.create({
+                mobileNo: call.request.mobileNo,
+                firstname: call.request.firstname,
+                lastname: call.request.lastname,
+                password:call.request.password,
+                email:call.request.email
+            }).then((savedCustomer) => {
+                if(!savedCustomer) {
+
+                   throw new error;
+                }
+                else{
+                    callback(null, savedCustomer)
+                }
+            }).catch(
+            function(err) {
+                console.log(err)
+                callback(err,{err_status:"customer sabt nashod"})
+            });
+
+        }
+        else{
+
+            callback(new Error("wrong  mobile or email format"));
+            
+        }
+           
     }
 
     getCustomer(call , callback) {
         login_load(call , function (err ,customer) {
+
             if(customer){
-                callback(null, customer)
+                callback(err, customer)
             }
             else {
-                callback(null ,{status:"customer not found"})
+                callback(err ,{err_status:"customer not found"})
             }
         })
     }
 
     deleteCustomer(call , callback) {
-        load(call , function (customer) {
-            if(customer){
-                customer.destroy()
-                    .then(() => callback(null ,{status:"removed Successfuly"}))
+
+
+            customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
+                if(!customers){
+
+                    callback(null,{err_status:"customer not found"})
+                    console.log("not");
+                    }
+                else {
+                    customers.destroy()
+                    .then(() => callback(null ,{err_status:"removed Successfuly"}))
+                    console.log("removed");
+            
                 }
-            else {
-                callback(null ,{status:"customer not found"})
-            }
-        })
-    }
+    
+        }).catch(
+            function(err) {
+                console.log(err)
+                callback(err,{err_status:"customer remove nashod"})
+            });
+        
+        }
+          
+    
+    
 
     updateCustomer(call , callback) {
         load(call , function (customer) {
             if(customer){  
+                console.log("update")
                 Object.assign(customer, call.request);
                 customer.save().then((savedCustomer) =>  callback(null, savedCustomer));
             }
             else {
-                callback(null ,{status:"customer not found"})
+                console.log("not found")
+                callback(new Error("customer not found") ,{err_status:"customer not found"})
             }
         })
     }
@@ -94,10 +170,18 @@ class CustomerAppHandler {
             districtId: call.request.districtId,
             address: call.request.address,
             location: call.request.location
-        }).then((savedAddress) => {
-            callback(null, savedAddress)
-        }).catch(function(err) {
-            callback("address sabt nashod",null)
+        }).then((savedadress) => {
+            if(!savedadress) {
+
+               throw new error;
+            }
+            else{
+                callback(null,savedadress)
+            }
+        }).catch(
+        function(err) {
+            console.log(err)
+            callback(err,{err_status:"adress sabt nashod"})
         });
     }
 
@@ -109,7 +193,9 @@ class CustomerAppHandler {
                     .then((savedCustomer) =>  callback(null, savedCustomer));
             }
             else {
-                callback("address peida nashod",null)
+
+                callback(new Error("errornot update !"))
+
             }
         })
     }
@@ -131,8 +217,16 @@ class CustomerAppHandler {
                     id:call.request.addressId
                 }
             }).then(address => {
-                console.log(address)
-                callback(null , address)
+                if(address)
+                {
+                    console.log(address)
+                    callback(null , address)
+
+                }
+                else{
+                    callback(new Error("error"))
+                }
+     
         })
     }
 }

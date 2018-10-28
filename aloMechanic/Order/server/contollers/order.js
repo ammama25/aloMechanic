@@ -39,19 +39,19 @@ function calcDiscount(call, callback) {
 
 function calcTransportPrice(call, callback) {
     grpcSetup(transportation ,function(Package){
-        const Client = Package.grossAmount_app_package.grossAmount;
+        const Client = Package.transportation_app_package.transportation;
         const client = new Client(transportationBindPath, grpc.credentials.createInsecure());
-        client.getGrossAmount({
+        client.gettransportation({
             productId: call.productId ,
             serviceId: call.serviceId ,
             categoryId: call.categoryId
-        }, function (err ,_grassAmount){
+        }, function (err ,transportation){
             if(err){
                 callback(err, null)
             }
             else {
-                console.log(_grassAmount.status);
-                callback(null, _grassAmount)
+                console.log(transportation.status);
+                callback(null,transportation)
             }
         })
     });

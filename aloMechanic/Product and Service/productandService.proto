@@ -5,7 +5,7 @@ package productandservice_app_package;
 
 service productandservice {
     rpc getPricedItems (items) returns (responseItems) {}
-  
+
 }
 
 message item {
@@ -30,5 +30,6 @@ message responseItem {
 
 message responseItems {
     repeated responseItem responseItems = 1 ;
+    string err_status = 2;
 }
 

@@ -30,5 +30,6 @@ message responseItem {
 
 message responseItems {
     repeated responseItem responseItems = 1 ;
+    string err_status = 2;
 }
 

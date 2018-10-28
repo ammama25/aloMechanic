@@ -18,6 +18,7 @@ function register(req,res,next) {
             email: req.body.email  
            } , function (err , customer) {
             if(err){
+                console.log(err);
                 next(err)
             }
             else {
@@ -31,13 +32,24 @@ function login(req, res ,next) {
     grpcSetup(protoAddress ,function(Package){
         const Client = Package.customer_app_package.CustomerApp;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.getCustomer({mobileNo: req.body.mobileNo , password: req.body.password }, function (err , customer) {
-            if(customer){
-                req.body.id = customer.id
-                next()
+        client.getCustomer({mobileNo: req.body.mobileNo , password: req.body.password
+         }, function (err , customer) {
+            console.log(customer);
+            console.log(err);
+            if(err){
+                console.log(err);
+                next(err)
             }
-            else
-                res.send("error in login")
+            else {
+                console.log("tainja");
+                req.body.id = customer.id
+                console.log(customer);
+                next()
+                
+            }
+
+      
+ 
         })
     });
 }
@@ -52,9 +64,19 @@ function update(req, res ,next) {
             lastname: req.body.lastname ,
             password: req.body.password ,
             email: req.body.email
-            } ,
-            function (err , customer) {
-                res.json(customer)
+            },
+            function (err , err_status) {
+                if(err)
+                {
+                    next(err)
+                }
+                else{
+
+                    console.log(err, err_status)
+                    return res.json(err)
+                }
+                
+                
             }
         )
     });
@@ -64,8 +86,9 @@ function remove(req, res ,next) {
     grpcSetup(protoAddress ,function(Package){
          const Client = Package.customer_app_package.CustomerApp;
          const client = new Client(bindPath, grpc.credentials.createInsecure());
-         client.deleteCustomer({mobileNo: req.body.mobileNo } , function (err , status) {
-             res.json(status)
+         client.deleteCustomer({mobileNo: req.body.mobileNo } , function (err , err_status) {
+             console.log(err);
+             res.json(err_status)
          })
     });
 }
@@ -81,6 +104,7 @@ function registerAddress(req,res,next) {
             location: req.body.location
         } , function (err , address) {
             if(err){
+                
                 next(err)
             }
             else {
@@ -102,7 +126,14 @@ function updateAddress(req, res ,next)
             address: req.body.address,
             location: req.body.location
         } , function (err , address) {
-            res.json(address)
+            if(err){
+                
+                next(err)
+            }
+            else {
+                return res.json(address);
+            }
+         
         })
     });
 }
@@ -120,6 +151,13 @@ function getAllAddresses(req, res ,next) {
             console.log(customerAddress)
             res.json(customerAddress)
         })
+        .catch(
+
+            function(err) {
+                console.log(err)
+                next(err);
+            }
+        )
 
 }
 

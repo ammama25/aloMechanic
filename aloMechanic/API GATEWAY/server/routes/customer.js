@@ -4,14 +4,15 @@ import auth from '../controllers/auth'
 
 const router = express.Router();
 
+//auth.validateOtpToken
 router.route('/')
-    .post(auth.validateOtpToken ,customer.register)
+    .post(auth.validateLoginToken,customer.register)
 
 router.route('/update')
-    .put(auth.validateLoginToken ,customer.update)
+    .put(auth.validateLoginToken,customer.update)
 
 router.route('/delete')
-    .delete(auth.validateLoginToken ,customer.remove);
+    .delete( auth.validateLoginToken,customer.remove);
 
 router.route('/registerAddress')
     .post(auth.validateLoginToken ,customer.registerAddress)
@@ -20,6 +21,6 @@ router.route('/updateAddress')
     .put(auth.validateLoginToken ,customer.updateAddress)
 
 router.route('/getAllAddresses')
-    .get(auth.validateLoginToken ,customer.getAllAddresses)
+    .get(customer.getAllAddresses)
 
 export default router;

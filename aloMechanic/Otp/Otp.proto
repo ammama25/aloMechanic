@@ -14,6 +14,7 @@ message mobileNo {
 
 message status {
     string status = 1;
+    string err_status = 2; 
 }
 
 
