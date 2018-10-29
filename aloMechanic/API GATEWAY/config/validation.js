@@ -34,9 +34,29 @@ class validation
             return false;
           }
 
+
+     
         
       }     
 
+
+     
+
+      // null_chekker(data)
+      // {
+      //   console.log("nullchekker");
+      //   console.log(data);
+
+      //       for (var member in data) {
+
+      //         if (data[member] == null)
+      //         {
+      //             throw new Error("fill the fields")
+      //         }
+                  
+      //             }
+
+      // }
 
 
 

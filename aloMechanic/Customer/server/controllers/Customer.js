@@ -221,7 +221,7 @@ class CustomerAppHandler {
 
                 }
                 else{
-                    callback(new Error("error"))
+                    callback(new Error("cant find the adress"))
                 }
      
         })

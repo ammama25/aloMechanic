@@ -1,5 +1,4 @@
 
-
 const env = require('../../config/env/development')
 const grpcSetup = require('../../config/grpc')
 const db = require('../../config/sequelize');
@@ -7,42 +6,85 @@ var sequelize = db.sequelize ;
 const bindPath = env.VEHICLE_SERVER_ADDRESSS;
 const protovehicle = './server/protos/Vehicle.proto';
 const grpc = require('grpc');
-const auth= require("./auth");
+const auth = require("./auth");
+const validation =require("../../config/validation");
 
+// var refvalidation=new validation.validation();
+
+
+
+function null_chekker(req) {
+
+    var bodyItems = req.body.items;
+
+            for(var i=0 ; i<req.body.length ; i++){
+
+                console.log(bodyItems[i],"test");
+                    if( bodyItems[i]==null)
+                    {
+                        
+                        return false;
+                        
+                    }
+                    
+                    
+             }
+                
+             return true;
+   }
 
 
 function registerCustomerVehicle(req,res,next) {
-    grpcSetup(protovehicle ,function(Package){
-        const Client = Package.CustomerVehicle_app_package.CustomerVehicleApp;
-        const client = new Client(bindPath, grpc.credentials.createInsecure());
-        if ( req.body.customerId !== null || req.body.vehicleId !== null ||  req.body.plateNo !== undefined) {      
-                client.createCustomerVehicle({
-                    vehicleId: req.body.vehicleId,
-                    customerId: req.body.customerId,
-                    plateNo: req.body.plateNo ,
-                    color: req.body.color ,
-                    mileage: req.body.mileage ,
-                } , function (err , customervehicle) {
-                    if(err){
-                    console.log("ta inja");
-                    next(err)
-                    }
-                    else {
-                        console.log(customervehicle);
-                        return res.json(customervehicle);
 
-                        }
-                })
-                
+
+
+
+        var test = null_chekker(req);
+        console.log(test,"test");
+        if(test)
+        {
+          
+            grpcSetup(protovehicle ,function(Package){
+                const Client = Package.CustomerVehicle_app_package.CustomerVehicleApp;
+                const client = new Client(bindPath, grpc.credentials.createInsecure());
+                if ( req.body.customerId  || req.body.vehicleId  ||  req.body.plateNo) { 
+                        client.createCustomerVehicle({
+                            vehicleId: req.body.vehicleId,
+                            customerId: req.body.customerId,
+                            plateNo: req.body.plateNo ,
+                            color: req.body.color ,
+                            mileage: req.body.mileage ,
+                        } , function (err , customervehicle) {
+                            if(err){
+                            console.log("ta inja");
+                            next(err)
+                            }
+                            else {
+                                console.log(customervehicle);
+                                return res.json(customervehicle);
+        
+                                }
+                        })
+                        
+                }
+                else{
+        
+        
+                    next (new error("fill all fields"))
+                }
+        
+        
+            });
+
+
+
         }
         else{
+                Console.log("error");
 
 
-            next (new error("fill all fields"))
         }
-
-
-    });
+    
 }
 
 
