@@ -1,9 +1,11 @@
 const db = require('../../config/sequelize');
 const env = require('../../config/env/development')
+const validation =require("../../config/validation")
 const otpRecord = db.otpRecord;
 var Kavenegar = require('kavenegar');
 var kavenegar = Kavenegar.KavenegarApi({apikey: env.KaveNegarAPI});
 
+let ref_validation = new validation.validation();
 
 function setExpireTime(minute) {
     var currentTime = new Date();
@@ -33,6 +35,8 @@ function assignCode(phoneNumber , callback) {
 
 function sendSMS(phoneNumber, code,callback) {
 
+
+
     var sms  = "your code is : " + code ;
     console.log("-----------------------------------------------")
     console.log(code)
@@ -41,6 +45,7 @@ function sendSMS(phoneNumber, code,callback) {
         callback("code is used");
     }
     else{
+                
         kavenegar.Send({
             message: sms,
             sender: "100065995",
@@ -49,7 +54,7 @@ function sendSMS(phoneNumber, code,callback) {
             console.log(response);
             console.log(status);
             callback(status);
-        });
+        });          
     }
 }
 
@@ -71,27 +76,43 @@ class OtpAppHandler {
 
     sendRequest(call ,callback) {
         assignCode(call.request.mobileNo ,function (code) {
+
             sendSMS(call.request.mobileNo ,code , function(status){
-                if(status==200) {
-                    addRecord(call.request.mobileNo , code , function (result , error) {
-                        if(!error){
-                            callback(null ,{status:"sent"})
-                        }
-                        else
-                            callback(error ,{status:"sent"})
-                    })
-                    callback(null ,{status:"sent"})
+                var  main=ref_validation.validatephonenumber(call.request.mobileNo)
+                if(main)
+                {
+                    if(status==200) {
+                        addRecord(call.request.mobileNo , code , function (result , error) {
+                            if(!error){
+                                callback(null ,{status:"sent"})
+                            }
+                            else
+                                callback(error ,{status:"sent"})
+                        })
+                        callback(null ,{status:"sent"})
+                    }
+                    else {
+                        callback(null ,{status:"sms not sent"})
+                    }
+
                 }
-                else {
-                    callback(null ,{status:"sms not sent"})
-                }
+                else{
+
+                    callback(new Error ("unvalid mobile number"))
+        
+        
+                        
+                    }
+         
             });
         })
     }
 
+
     validateCode(call , callback) {
-        otpRecord.findOne({where: {mobileNo: call.request.mobileNo , isUsed:false} }).then(record => {
-            if(record){
+        otpRecord.findOne({where: {mobileNo: call.request.mobileNo} }).then(record => {
+            console.log(record.isUsed);
+            if(record && record.isUsed==false){
                 if(record.code == call.request.code && record.expirationDate >= new Date()){
                     record.isUsed = true ;
                     record.save() ;
@@ -100,13 +121,22 @@ class OtpAppHandler {
                     callback(null ,{status:"ok"})
                 }
                 else {
-                    callback(null ,{status:"bad"})
+                    callback(new Error ("wrong code") ,{status:"wrong code"})
                 }
             }
             else  {
-                callback(null ,{status:"bad"})
+                callback(new Error ("wrong  mobile number  // or used number"),{status:"invalid mobile"})
             }
-        })
+        }).catch(
+
+
+            function(err)
+            {
+                console.log(err);
+                callback(err)
+
+            }
+        )
     }
 }
 

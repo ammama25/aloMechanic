@@ -26,7 +26,7 @@ class CustomerVehicleAppHandler {
                 console.log("wlc to the register")
                 if(!savedCustomerVehicle)
                 {
-                    callback(null,{status:"customerVehicle sabt nashod"})
+                    callback(new Error("error -- not register"))
                 }
                 else{
                     
@@ -56,7 +56,7 @@ class CustomerVehicleAppHandler {
                 }
             
             else {
-                callback(null ,{status:"customerVehicle not found"})
+                callback(new Error("customerVehicle not removed"))
             }
 
         })
@@ -77,7 +77,7 @@ class CustomerVehicleAppHandler {
                     });
             }
             else {
-                callback(null ,{status:"customer not found"})
+                callback(new Error("customerVehicle not found"))
             }
 
         })

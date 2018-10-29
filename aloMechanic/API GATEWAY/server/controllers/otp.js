@@ -26,6 +26,7 @@ function validate(req, res, next) {
         client.validateCode({mobileNo: req.body.mobileNo , code: req.body.code} , function(err , result){
             if(err){
                 req.validate = err ;
+                return res.json(err)
             }
             else{
                 if(result.status == "ok"){
@@ -33,7 +34,8 @@ function validate(req, res, next) {
                     next()
                 }
                 else {
-                    res.json(result.status)
+                    
+                        return res.json(result.status)
                 }
             }
         })

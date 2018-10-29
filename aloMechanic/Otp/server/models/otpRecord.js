@@ -22,7 +22,8 @@ module.exports = (sequelize, DataTypes) => {
             allowNull: false
         },
         isUsed:{
-            type: DataTypes.BOOLEAN
+            type: DataTypes.BOOLEAN,
+            defaultValue: false
         }
     });
     return otpRecord;

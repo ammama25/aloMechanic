@@ -10,7 +10,18 @@ function getAllCategories(req, res ,next) {
         .then(categories => {
             console.log(categories)
             res.json(categories)
-        })
+        }).catch(
+
+            function(err)
+            {
+                    console.log*(err);
+                next (err)
+    
+            }
+    
+    
+        )
+    
 
 }
 
@@ -21,7 +32,18 @@ function getAllServices(req, res ,next) {
         .then(services => {
             console.log(services)
             res.json(services)
-        })
+        }).catch(
+
+            function(err)
+            {
+                 console.log*(err);
+                next (err)
+    
+            }
+    
+    
+        )
+    
 
 }
 
@@ -32,7 +54,18 @@ function getAllProducts(req, res ,next) {
         .then(products => {
             console.log(products)
             res.json(products)
-        })
+        }).catch(
+
+            function(err)
+            {
+                 console.log*(err);
+                next (err)
+    
+            }
+    
+    
+        )
+    
 
 }
 

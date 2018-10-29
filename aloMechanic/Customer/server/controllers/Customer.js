@@ -10,25 +10,22 @@ let ref_validation = new validation.validation("mob-emial");
 
 function login_load(call  ,callback) {
     customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
-        if (!customers) {
-         err.message="wrong number";
-            console.log(err.message);
-            throw new Error(err);
-           // callback(err,{err_status:"wrong number"})
-        }
-        else if (!(customers.validPassword(call.request.password))) {
-          
+                if (!customers) {
+                    
+                    throw new Error("not found");
+                // callback(err,{err_status:"wrong number"})
+                }
+                    else if (!(customers.validPassword(call.request.password))) {
+                    
 
-            err.message="wrong pass";
-            console.log(err.message);
-                throw new Error(err);
-           // callback(null,{err_status:"wrong password"})
+                            throw new Error("wrong pass");
+                    // callback(null,{err_status:"wrong password"})
 
-        }
-        else {
+                    }
+                        else {
 
-            callback(null, customers);
-        }
+                            callback(null, customers);
+                        }
     })
     .catch(
 

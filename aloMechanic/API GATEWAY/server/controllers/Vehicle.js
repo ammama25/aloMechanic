@@ -10,26 +10,38 @@ const grpc = require('grpc');
 const auth= require("./auth");
 
 
+
 function registerCustomerVehicle(req,res,next) {
     grpcSetup(protovehicle ,function(Package){
         const Client = Package.CustomerVehicle_app_package.CustomerVehicleApp;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
-        client.createCustomerVehicle({
-            vehicleId: req.body.vehicleId,
-            customerId: req.body.customerId,
-            plateNo: req.body.plateNo ,
-            color: req.body.color ,
-            mileage: req.body.mileage ,
-           } , function (err , customervehicle) {
-            if(err){
-            console.log("ta inja");
-               next(err)
-            }
-            else {
-                console.log(customervehicle);
-                return res.json(customervehicle);
-            }
-        })
+        if ( req.body.customerId !== null || req.body.vehicleId !== null ||  req.body.plateNo !== undefined) {      
+                client.createCustomerVehicle({
+                    vehicleId: req.body.vehicleId,
+                    customerId: req.body.customerId,
+                    plateNo: req.body.plateNo ,
+                    color: req.body.color ,
+                    mileage: req.body.mileage ,
+                } , function (err , customervehicle) {
+                    if(err){
+                    console.log("ta inja");
+                    next(err)
+                    }
+                    else {
+                        console.log(customervehicle);
+                        return res.json(customervehicle);
+
+                        }
+                })
+                
+        }
+        else{
+
+
+            next (new error("fill all fields"))
+        }
+
+
     });
 }
 
@@ -53,8 +65,20 @@ function update(req, res ,next)
             }
 
             , function (err , customervehicle) {
-                console.log(customervehicle);
-            res.json(customervehicle)
+
+                if(err)
+                {
+
+                    next(err);
+                }
+                else{
+
+                    console.log(customervehicle);
+                    res.json(customervehicle)
+
+
+                }
+           
         })
     });
 }
@@ -63,8 +87,20 @@ function remove(req, res ,next) {
     grpcSetup(protovehicle ,function(Package){
          const Client = Package.CustomerVehicle_app_package.CustomerVehicleApp;
          const client = new Client(bindPath, grpc.credentials.createInsecure());
-         client.deleteCustomerVehicle({customerId:req.body.customerId } , function (err , status) {
-             res.json(status)
+         client.deleteCustomerVehicle({customerId:req.body.customerId } , function (err , status) {     
+            if(err)
+            {
+
+                next(err);
+            }
+            else{
+
+               
+                res.json(status)
+
+
+            }
+             
          })
     });
 }
@@ -83,7 +119,17 @@ function getCustomerVehicle(req, res ,next)
         .then(Customervehicle => {
             console.log(Customervehicle)
             res.json(Customervehicle)
-        })
+        }).catch(
+
+            function(err)
+            {
+                    console.log*(err);
+                next (err)
+
+            }
+
+
+        )
 
 
 }
@@ -100,7 +146,17 @@ function getallvehicle(req,res,next)
     .then(vehicle => {
         console.log(vehicle)
         res.json(vehicle)
-    })
+    }).catch(
+
+        function(err)
+        {
+                console.log*(err);
+            next (err)
+
+        }
+
+
+    )
 
 
 }
