@@ -1,6 +1,4 @@
-
 const db = require('../../config/sequelize');
-
 const customerVehicle=db.customerVehicle;
 
 
@@ -10,9 +8,8 @@ function load(call , callback) {
         callback(customerVehicles)
     });
 }
+
 class CustomerVehicleAppHandler {
-    
- 
 
     createCustomerVehicle(call ,callback) {
         console.log("ta inja");
@@ -20,41 +17,26 @@ class CustomerVehicleAppHandler {
             vehicleId: call.request.vehicleId,
             customerId: call.request.customerId,
             plateNo: call.request.plateNo,
+            year: call.request.year,
             color:call.request.color,
             mileage:call.request.mileage
       }).then((savedCustomerVehicle) => {
-                console.log("wlc to the register")
-                if(!savedCustomerVehicle)
-                {
-                    callback(new Error("error -- not register"))
-                }
-                else{
-                    
-                  
-                        callback(null ,savedCustomerVehicle )
-                }
-            })
-    // .catch(
-    //     function(err) {
-    //     // print the error details
-    //     console.log("omid shams /////////////////////");
-     
-    //     callback(null,{status:"customerVehicle sabt nashod"})
-
-    // });
-
-}
-
+            if(!savedCustomerVehicle) {
+                callback(new Error("error -- not register"))
+            }
+            else{
+                callback(null ,savedCustomerVehicle )
+            }
+        })
+    }
 
 
     deleteCustomerVehicle(call , callback) {
-        console.log("remove-time");
         load(call , function (customerVehicle) {
             if(customerVehicle){
                 customerVehicle.destroy()
                     .then(() => callback(null ,{status:"removed Successfuly"}))
                 }
-            
             else {
                 callback(new Error("customerVehicle not removed"))
             }
@@ -64,10 +46,6 @@ class CustomerVehicleAppHandler {
     }
 
     updateCustomerVehicle(call , callback) {
-
-
-        console.log("update-time")
-
         load(call , function (customerVehicle) {
             if(customerVehicle){  
                 Object.assign(customerVehicle, call.request);
@@ -81,6 +59,12 @@ class CustomerVehicleAppHandler {
             }
 
         })
+    }
+
+    getVehicle(call, callback){
+        customerVehicle.findOne({where:{id:call.request.CustomerVehicleId}}).then( customerVehicle => {
+            callback(null, customerVehicle)
+        });
     }
     
 }

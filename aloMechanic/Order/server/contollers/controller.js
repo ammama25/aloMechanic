@@ -14,7 +14,6 @@ class orderAppHandler{
     placeOrder(call,callback) {
         items.get(call.request, function (itemsErr, pricedItems) {
             if(!itemsErr){
-                console.log(pricedItems)
                 order.generate(call.request, pricedItems, function (orderErr, generatedOrder) {
                     if(!orderErr){
                         address.get(call.request, function (addressErr, dbAddress) {
@@ -34,7 +33,6 @@ class orderAppHandler{
                                         }))
                                     }))
                                 }) .then(function (result) {
-                                    console.log(generatedOrder)
                                     callback(null, generatedOrder)
                                 }).catch(function (err) {
                                     // console.log(err)

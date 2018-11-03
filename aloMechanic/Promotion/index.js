@@ -7,7 +7,7 @@ const promotionAppHandler = require('./server/controllers/promotion');
 
 
 db.sequelize.sync().then(() => {
-    console.log('DB is connected');
+    console.log('Promotion DB is connected');
 });
 
 
@@ -22,7 +22,7 @@ const createServer = function (bindPath, handler) {
             server.addService(service, handler);
             server.bind(bindPath, grpc.ServerCredentials.createInsecure());
             server.start();
-            console.log('Server running on 8089');
+            console.log('Promotion running on 8089');
         });
 }
 

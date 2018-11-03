@@ -7,7 +7,7 @@ const transportationAppHandler = require('./server/controllers/transportation');
 
 
 db.sequelize.sync().then(() => {
-    console.log('DB is connected');
+    console.log('transportation DB is connected');
 });
 
 
@@ -23,7 +23,7 @@ const createServer = function (bindPath, handler) {
             server.addService(service, handler);
             server.bind(bindPath, grpc.ServerCredentials.createInsecure());
             server.start();
-            console.log('Server running on 8090');
+            console.log('transportation running on 8090');
         });
 }
 

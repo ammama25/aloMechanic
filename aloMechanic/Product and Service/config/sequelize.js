@@ -66,6 +66,7 @@ const operatorsAliases = {
 
 
 db.productService = require("../server/models/product and service")(sequelize, _sequelize2.default);
+db.productVehicle = require("../server/models/productVehicle")(sequelize, _sequelize2.default);
 db.productService.hasOne(db.productService, { as: 'children', foreignKey: 'parentId'})
 
 

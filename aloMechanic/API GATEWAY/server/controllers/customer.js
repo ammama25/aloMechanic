@@ -1,7 +1,7 @@
 const env = require('../../config/env/development')
 const grpcSetup = require('../../config/grpc')
 const db = require('../../config/sequelize');
-var sequelize = db.sequelize ;
+var   sequelize = db.sequelize ;
 const bindPath = env.CUSTOMER_SERVER_ADDRESS;
 const protoAddress = './server/protos/Customer.proto';
 const grpc = require('grpc');
@@ -66,8 +66,7 @@ function update(req, res ,next) {
             email: req.body.email
             },
             function (err , err_status) {
-                if(err)
-                {
+                if(err){
                     next(err)
                 }
                 else{

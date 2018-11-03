@@ -52,6 +52,7 @@ function registerCustomerVehicle(req,res,next) {
                             vehicleId: req.body.vehicleId,
                             customerId: req.body.customerId,
                             plateNo: req.body.plateNo ,
+                            year: req.body.year,
                             color: req.body.color ,
                             mileage: req.body.mileage ,
                         } , function (err , customervehicle) {

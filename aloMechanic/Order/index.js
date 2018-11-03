@@ -7,7 +7,7 @@ const productandServiceAppHandler = require('./server/contollers/controller.js')
 
 
 db.sequelize.sync().then(() => {
-    console.log('DB is connected');
+    console.log('ORDER DB is connected');
 });
 
 
@@ -22,7 +22,7 @@ const createServer = function (bindPath, handler) {
             server.addService(service, handler);
             server.bind(bindPath, grpc.ServerCredentials.createInsecure());
             server.start();
-            console.log('Server running');
+            console.log('Order running');
         });
 }
 

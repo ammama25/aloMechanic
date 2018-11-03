@@ -1,37 +1,37 @@
-    
-
-
-
-function random()
-{
-    return Math.floor(Math.random() * 100) + 1; // returns a random integer from 1 to 100
-
-
-}
-
-
+var   async             = require("async");
+const db                = require('../../config/sequelize');
+const productAndService = db.productService
+const productVehicles   = db.productVehicle
 
 class productandServiceAppHandler{
 
     getPricedItems(call,callback) {
-        console.log(call.request)
         var responseItems = call.request.items;
-        for(var i=0 ; i<call.request.items.length ; i++){
-            var categoryPrice = random();
-            var servicePrice = random();
-            var productPrice = random();
-            var totalPrice = categoryPrice + servicePrice + productPrice;
-            responseItems[i].categoryPrice = categoryPrice
-            responseItems[i].servicePrice = servicePrice
-            responseItems[i].productPrice = productPrice
-            responseItems[i].totalPrice = totalPrice
-        }
-        console.log(responseItems)
-        callback(null, {responseItems});
-
-
+        async.forEachOf(responseItems, function (responseItem, key, forCallback) {
+            responseItem.categoryPrice = 0
+            productVehicles.findOne({where:{productAndServiceId:responseItem.serviceId , vehicleId:call.request.vehicleId}}).then(service => {
+                try {
+                    responseItem.servicePrice = service.price
+                    productAndService.findOne({where:{id:responseItem.productId}}).then(product => {
+                        try {
+                            responseItem.productPrice = product.price
+                            responseItem.totalPrice =  responseItem.productPrice +  responseItem.servicePrice + responseItem.categoryPrice
+                        } catch (e) {
+                            return forCallback(e);
+                        }
+                        if(responseItem == responseItems[responseItems.length - 1])
+                            forCallback(responseItems)
+                    })
+                } catch (e) {
+                    return forCallback(e);
+                }
+            }) 
+        }, function (err) {
+            if (err) console.log(err);
+            console.log(responseItems)
+            callback(null, {responseItems});
+        })
     }
-
 }
 
 export default productandServiceAppHandler;

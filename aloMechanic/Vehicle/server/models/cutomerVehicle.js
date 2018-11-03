@@ -21,9 +21,11 @@ module.exports = (sequelize, DataTypes) => {
         plateNo: {
             type: DataTypes.STRING,
             required: true,
-         
         },
-
+        year: {
+            type: DataTypes.INTEGER,
+            required: true
+        },
         color: {
             type: DataTypes.STRING,
             required: true,

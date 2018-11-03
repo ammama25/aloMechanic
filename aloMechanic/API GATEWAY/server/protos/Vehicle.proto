@@ -8,6 +8,7 @@ service CustomerVehicleApp {
     rpc createCustomerVehicle (CustomerVehicle) returns (DbCustomerVehicle) {}
     rpc deleteCustomerVehicle (customerId) returns (response) {}
     rpc updateCustomerVehicle (CustomerVehicle) returns (DbCustomerVehicle) {}
+    rpc getVehicle (CustomerVehicleId) returns (DbCustomerVehicle) {}
 
 }
 message customerVehicles {
@@ -21,7 +22,7 @@ message CustomerVehicle {
     string plateNo = 3;
     string color = 4;
     string mileage = 5;
-    
+
 }
 
 message DbCustomerVehicle {
@@ -37,7 +38,7 @@ message DbCustomerVehicle {
 
 message CustomerVehicleId {
     string CustomerVehicleId = 1;
-   
+
 }
 
 message response {

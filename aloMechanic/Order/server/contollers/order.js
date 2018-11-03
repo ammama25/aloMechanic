@@ -8,12 +8,9 @@ const grpc                   = require('grpc');
 
 function calcGrossAmount(orderItems) {
     var temp = 0 ;
-    console.log(orderItems)
     for (var i=0 ; i<orderItems.length ;i++){
         temp = parseInt(orderItems[i].totalPrice) + temp
-        console.log(orderItems[i])
     }
-    console.log(temp)
     return temp
 }
 
@@ -50,7 +47,6 @@ function calcTransportPrice(call, callback) {
                 callback(err, null)
             }
             else {
-                console.log(transportation.status);
                 callback(null,transportation)
             }
         })
@@ -59,7 +55,6 @@ function calcTransportPrice(call, callback) {
 
 function generate(obj, orderItems, callback) {
     var grossAmount =  calcGrossAmount(orderItems) ;
-    console.log(obj)
     calcTransportPrice(obj, function (err, transportPrice) {
         if(!err){
             calcDiscount(obj, function (err, discount) {

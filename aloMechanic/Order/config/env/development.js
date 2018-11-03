@@ -11,11 +11,12 @@ export default {
     DATABASE_USERNAME                : process.env.DATABASE_USERNAME || "ammama",
     DATABASE_PASSWORD                : process.env.DATABASE_PASSWORD || "ammama",
     DATABASE_DIALECT                 : process.env.DATABASE_DIALECT || 'mssql' ,
-    SERVER_ADDRESS                   :'127.0.0.1:8092',
+    SERVER_ADDRESS                   : '127.0.0.1:8092',
     PROMOTION_SERVER_ADDRESS         : '127.0.0.1:8089',
-    TRANSPORTATION_SERVER_ADDRESS    :'127.0.0.1:8090',
+    TRANSPORTATION_SERVER_ADDRESS    : '127.0.0.1:8090',
     CUSTOMER_SERVER_ADDRESS          : '127.0.0.1:8083',
     PRODUCTANDSERVICE_SERVER_ADDRESS : '127.0.0.1:8091',
+    VEHICLE_SERVER_ADDRESSS          : '127.0.0.1:8088',
 
 };
 

@@ -49,6 +49,9 @@ module.exports = (sequelize, DataTypes) => {
         scheduleThrough: {
             type: DataTypes.INTEGER,
             required: true
+        },
+        assignTo: {
+            type: DataTypes.INTEGER
         }
     });
     return order;

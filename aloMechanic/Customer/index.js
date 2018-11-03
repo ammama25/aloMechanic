@@ -7,7 +7,7 @@ const loader = require('@grpc/proto-loader');
 const CustomerAppHandler = require('./server/controllers/Customer');
 
 db.sequelize.sync().then(() => {
-    logger.info(`db is connected`);
+    logger.info(`Customer db is connected`);
 });
 
 
@@ -23,7 +23,7 @@ const createServer = function (bindPath, handler) {
             server.addService(service, handler);
             server.bind(bindPath, grpc.ServerCredentials.createInsecure());
             server.start();
-            console.log('Server running on 8083');
+            console.log('Customer running on 8083');
         });
 }
 

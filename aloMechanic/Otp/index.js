@@ -5,7 +5,7 @@ const loader = require('@grpc/proto-loader');
 const OtpAppHandler = require('./server/controllers/Otp');
 
 db.sequelize.sync().then(() => {
-    console.log('DB is connected');
+    console.log('OTP DB is connected');
 });
 
 
@@ -20,7 +20,7 @@ const createServer = function (bindPath, handler) {
             server.addService(service, handler);
             server.bind(bindPath, grpc.ServerCredentials.createInsecure());
             server.start();
-            console.log('Server running on 8083');
+            console.log('OTP running on 8083');
         });
 }
 

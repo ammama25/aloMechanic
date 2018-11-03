@@ -30,7 +30,7 @@ router.get('/api-status', (req, res) => {
 router.use('/customers', customer);
 router.use('/otp', otp);
 router.use('/login', login);
-router.use('/Vehicle',vehicle);
+router.use('/vehicle',vehicle);
 router.use('/location',location);
 router.use('/products',product);
 router.use("/transportation",transportation);

@@ -1,32 +1,31 @@
-
-import env from './config/env/development';
+import logger from './config/log4js';
+import config from './config/env';
 import db from './config/sequelize';
 const grpc = require('grpc');
 const loader = require('@grpc/proto-loader');
-const productandServiceAppHandler = require('./server/contollers/productandService.js');
-
+const RepaimanAppHandler = require('./server/controllers/Repairman');
 
 db.sequelize.sync().then(() => {
-    console.log('productandService DB is connected');
+    logger.info(`Repairman db is connected`);
 });
 
 
-const PATH = env.SERVER_ADDRESS;
+
+const PATH = '127.0.0.1:8093';
 
 const createServer = function (bindPath, handler) {
-    loader.load('productandService.proto')
+    loader.load('Repairman.proto')
         .then((packageDefinition) => {
             const Package = grpc.loadPackageDefinition(packageDefinition);
-            const service = Package.productandservice_app_package.productandservice.service;
+            const service = Package.repaiman_app_package.RepairmanApp.service;
             const server = new grpc.Server();
             server.addService(service, handler);
             server.bind(bindPath, grpc.ServerCredentials.createInsecure());
             server.start();
-            console.log('ProductandService running on 8091');
+            console.log('Customer running on 8083');
         });
 }
 
-createServer(PATH, new productandServiceAppHandler );
+createServer(PATH, new RepaimanAppHandler);
 
 
-// export default app;

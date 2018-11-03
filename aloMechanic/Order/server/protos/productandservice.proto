@@ -16,6 +16,7 @@ message item {
 
 message items {
     repeated item items = 1 ;
+    int32    vehicleId  = 2 ;
 }
 
 message responseItem {
@@ -30,5 +31,6 @@ message responseItem {
 
 message responseItems {
     repeated responseItem responseItems = 1 ;
+    string err_status = 2;
 }
 
