@@ -3,6 +3,20 @@ syntax = "proto3";
 
 package repaiman_app_package;
 
-service RepaimanApp {
-    
+service RepairmanApp {
+    rpc getFreeSlots(categoryDate) returns (times) {}
+}
+
+message categoryDate {
+	int32  categoryId  = 1 ;
+	string date        = 2 ;
+	int32  repairmanId = 3 ;
+}
+
+message time {
+	int32 time = 1 ;
+}
+
+message times{
+	repeated time times = 1 ;
 }

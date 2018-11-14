@@ -5,7 +5,7 @@ const productVehicles   = db.productVehicle
 
 class productandServiceAppHandler{
 
-    getPricedItems(call,callback) {
+    getPricedItems(call, callback) {
         var responseItems = call.request.items;
         async.forEachOf(responseItems, function (responseItem, key, forCallback) {
             responseItem.categoryPrice = 0
@@ -17,20 +17,26 @@ class productandServiceAppHandler{
                             responseItem.productPrice = product.price
                             responseItem.totalPrice =  responseItem.productPrice +  responseItem.servicePrice + responseItem.categoryPrice
                         } catch (e) {
-                            return forCallback(e);
+                            throw new Error("error in calculating total price in DB")
                         }
                         if(responseItem == responseItems[responseItems.length - 1])
                             forCallback(responseItems)
                     })
                 } catch (e) {
-                    return forCallback(e);
+                    throw new Error("error in finding service price")
                 }
             }) 
         }, function (err) {
-            if (err) console.log(err);
+            if (err) {
+                callback(new Error("error in finding product or service in DB"), null)
+            }
             console.log(responseItems)
             callback(null, {responseItems});
         })
+    }
+
+    getAllowedProductServices(call, callback){
+        
     }
 }
 

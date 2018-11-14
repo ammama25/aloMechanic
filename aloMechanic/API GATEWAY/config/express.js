@@ -43,7 +43,7 @@ morgan.token('id', function getId (req) {
 const app = express();
 
 app.use(assignId)
-
+app.use(express.static(__dirname));
 function assignId (req, res, next) {
     req.id = uuid.v4();
     next();
@@ -77,6 +77,7 @@ app.use((req, res, next) => {
 
 // mount all routes on /api path
 app.use('/api', routes);
+
 
 // express-validation provides a middleware function that can validate the request payload data given a set of rules provided by us.
 app.use((err, req, res, next) => {

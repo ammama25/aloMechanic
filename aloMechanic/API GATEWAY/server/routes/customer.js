@@ -20,6 +20,9 @@ router.route('/registerAddress')
 router.route('/updateAddress')
     .put(auth.validateLoginToken ,customer.updateAddress)
 
+router.route('/forgottPass')
+    .put(auth.validateOtpToken ,customer.update)
+
 router.route('/getAllAddresses')
     .get(customer.getAllAddresses)
 

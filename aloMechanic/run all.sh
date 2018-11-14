@@ -7,7 +7,3 @@ cd "Promotion"           && start gulp nodemon &
 cd "Transportation"      && start gulp nodemon &
 cd "Repairman"           && start gulp nodemon &
 cd "Vehicle"             && start gulp nodemon  
-
-
-
-

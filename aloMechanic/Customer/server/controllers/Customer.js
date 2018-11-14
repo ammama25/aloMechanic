@@ -6,8 +6,6 @@ const validation =require('../../config/validation');
 let ref_validation = new validation.validation("mob-emial");
 
 
-
-
 function login_load(call  ,callback) {
     customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
         if (!customers) {
@@ -28,41 +26,29 @@ function login_load(call  ,callback) {
 }
 
 function load(call , callback) {
-  
     customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
         callback(customers)
     })
-    }
+}
 
 class CustomerAppHandler {
 
     listCustomer(_, callback) {
-
         customer.findAll()
         .then(customers => {
-
-            if(!customers)
-            {
-            callback(new error("error"))
-
-
+            if(!customers){
+                callback(new error("error"))
             }
             else{
-
                 console.log({customers})
                 callback(null , {customers});
-
-            }
-            
+            }   
         })
     }
 
     createCustomer(call ,callback) {
-
         var mail=ref_validation.validateEmail(call.request.email);
         var mobile=ref_validation.validatephonenumber(call.request.mobileNo);
-
-
 
         console.log(mail && mobile);
         if(mail && mobile )
@@ -87,19 +73,14 @@ class CustomerAppHandler {
                 console.log(err)
                 callback(err,{err_status:"customer sabt nashod"})
             });
-
         }
         else{
-
-            callback(new Error("wrong  mobile or email format"));
-            
-        }
-           
+            callback(new Error("wrong  mobile or email format"));  
+        }    
     }
 
     getCustomer(call , callback) {
         login_load(call , function (err ,customer) {
-
             if(customer){
                 callback(err, customer)
             }
@@ -110,21 +91,16 @@ class CustomerAppHandler {
     }
 
     deleteCustomer(call , callback) {
-
-
-            customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
-                if(!customers){
-
-                    callback(null,{err_status:"customer not found"})
-                    console.log("not");
-                    }
-                else {
-                    customers.destroy()
-                    .then(() => callback(null ,{err_status:"removed Successfuly"}))
-                    console.log("removed");
-            
-                }
-    
+        customer.findOne({where:{mobileNo:call.request.mobileNo}}).then(customers => {
+            if(!customers){
+                callback(null,{err_status:"customer not found"})
+                console.log("not");
+            }
+            else {
+                customers.destroy()
+                .then(() => callback(null ,{err_status:"removed Successfuly"}))
+                console.log("removed");
+            }
         }).catch(
             function(err) {
                 console.log(err)

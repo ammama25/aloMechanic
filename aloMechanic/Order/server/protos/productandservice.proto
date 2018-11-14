@@ -1,11 +1,10 @@
-
 syntax = "proto3";
 
 package productandservice_app_package;
 
 service productandservice {
     rpc getPricedItems (items) returns (responseItems) {}
-
+    rpc getAllowedProductServices (carCategory) returns (productServices) {}
 }
 
 message item {
@@ -33,4 +32,19 @@ message responseItems {
     repeated responseItem responseItems = 1 ;
     string err_status = 2;
 }
+
+message carCategory {
+    int32 vehicleId  = 1 ;
+    int32 categoryId = 2 ;
+}
+
+message productService {
+    int32 productId = 1 ;
+    int32 serviceId = 2 ;
+}
+
+message productServices {
+    repeated productService productService = 1;
+}
+
 

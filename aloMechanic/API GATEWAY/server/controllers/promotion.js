@@ -5,7 +5,6 @@ const promotion = './server/protos/promotion.proto';
 const grpc = require('grpc');
 
 function getpromotion(req,res,next) {
-    console.log("tainja");
     grpcSetup(promotion ,function(Package){
         const Client = Package.promotion_app_package.promotion;
         const client = new Client(bindPath, grpc.credentials.createInsecure());

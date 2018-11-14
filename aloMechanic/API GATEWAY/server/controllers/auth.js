@@ -6,9 +6,7 @@ const secret = config.jwtSecret;
 function generateOtpToken(req, res, next) {
 
 
-if(req.body.mobileNo)
-{
-
+if(req.body.mobileNo){
     if (req.validate == "ok") {
         const jwtPayload = {
 
@@ -62,7 +60,6 @@ function generateLoginToken(req, res, next) {
 }
 
 function validateOtpToken(req , res , next) {
-    console.log("tainja")
     jwt.verify(req.headers.token, secret, function(err, decoded) {
         if(!err){
             if (decoded.recieveFrom == 'otp') {

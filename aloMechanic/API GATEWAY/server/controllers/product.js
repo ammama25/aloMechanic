@@ -11,18 +11,12 @@ function getAllCategories(req, res ,next) {
             console.log(categories)
             res.json(categories)
         }).catch(
-
-            function(err)
-            {
-                    console.log*(err);
+            function(err){
+                console.log(err);
                 next (err)
     
             }
-    
-    
-        )
-    
-
+        ) 
 }
 
 function getAllServices(req, res ,next) {
@@ -33,18 +27,11 @@ function getAllServices(req, res ,next) {
             console.log(services)
             res.json(services)
         }).catch(
-
-            function(err)
-            {
-                 console.log*(err);
+            function(err){
+                console.log(err);
                 next (err)
-    
             }
-    
-    
         )
-    
-
 }
 
 function getAllProducts(req, res ,next) {
@@ -55,18 +42,11 @@ function getAllProducts(req, res ,next) {
             console.log(products)
             res.json(products)
         }).catch(
-
-            function(err)
-            {
+            function(err){
                  console.log*(err);
                 next (err)
-    
             }
-    
-    
         )
-    
-
 }
 
 export default {getAllCategories, getAllServices, getAllProducts}

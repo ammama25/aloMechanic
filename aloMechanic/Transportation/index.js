@@ -1,4 +1,3 @@
-
 import env from './config/env/development';
 import db from './config/sequelize';
 const grpc = require('grpc');

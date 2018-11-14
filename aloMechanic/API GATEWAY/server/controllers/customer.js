@@ -41,15 +41,10 @@ function login(req, res ,next) {
                 next(err)
             }
             else {
-                console.log("tainja");
                 req.body.id = customer.id
                 console.log(customer);
                 next()
-                
             }
-
-      
- 
         })
     });
 }
@@ -65,17 +60,13 @@ function update(req, res ,next) {
             password: req.body.password ,
             email: req.body.email
             },
-            function (err , err_status) {
+            function (err , customer) {
                 if(err){
                     next(err)
                 }
                 else{
-
-                    console.log(err, err_status)
-                    return res.json(err)
-                }
-                
-                
+                    return res.json(customer)
+                }  
             }
         )
     });

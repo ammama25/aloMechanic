@@ -6,7 +6,6 @@ const grpc = require('grpc');
 
 function gettransportation(req,res,next) {
 
-    console.log("tainja");
     grpcSetup(transportation ,function(Package){
         const Client = Package.transportation_app_package.transportation;
         const client = new Client(bindPath, grpc.credentials.createInsecure());
@@ -19,13 +18,8 @@ function gettransportation(req,res,next) {
                console.log(err);
             }
             else {
-
-               
-                    console.log(transportation);
-                    return res.json(transportation);
-
-             
-      
+                console.log(transportation);
+                return res.json(transportation);
             }
         })
     });

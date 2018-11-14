@@ -29,16 +29,11 @@ gulp.task('nodemon', ['babel'], () =>
     ignore: ['node_modules/**/*.js', 'dist/**/*.js'],
     tasks: ['babel']
   }).on('start', function() {
+    process.stdout.write(String.fromCharCode(27) + "]0;" + "Otp" + String.fromCharCode(7));
     console.clear();
    }).on('restart', function() {
+    process.stdout.write(String.fromCharCode(27) + "]0;" + "Otp" + String.fromCharCode(7));
     console.clear();
    })
 );
 
-gulp.task('apidoc', (done) => {
-    plugins.apidoc({
-        src: 'server/routes/',
-        dest: 'docs/',
-        config: ''
-    }, done);
-});
