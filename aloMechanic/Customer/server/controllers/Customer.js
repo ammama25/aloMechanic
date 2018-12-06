@@ -47,13 +47,16 @@ class CustomerAppHandler {
     }
 
     createCustomer(call ,callback) {
-        var mail=ref_validation.validateEmail(call.request.email);
+        var mail
+        if(call.request.email) 
+            mail = ref_validation.validateEmail(call.request.email);
+        else 
+            mail = 1;
+
         var mobile=ref_validation.validatephonenumber(call.request.mobileNo);
 
         console.log(mail && mobile);
-        if(mail && mobile )
-        {
-
+        if(mail && mobile ){
             customer.create({
                 mobileNo: call.request.mobileNo,
                 firstname: call.request.firstname,
