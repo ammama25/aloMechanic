@@ -51,9 +51,6 @@ const operatorsAliases = {
 var sequelize = new _sequelize2.default(env.DATABASE_NAME, env.DATABASE_USERNAME, env.DATABASE_PASSWORD, {
     host: env.DATABASE_HOST,
     dialect: env.DATABASE_DIALECT,
-    dialectOptions: {
-        encrypt: true
-    },
     operatorsAliases ,
     define: {
         underscored: true

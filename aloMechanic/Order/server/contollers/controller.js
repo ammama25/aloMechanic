@@ -21,11 +21,11 @@ class orderAppHandler{
                                 return sequelize.transaction(function (t) {
                                     return Order.create(generatedOrder,
                                         {transaction: t}).then((function(dbOrder){
-                                        return OrderAddress.create(address.generate(dbAddress, dbOrder.id),
+                                        return OrderAddress.create(address.generate(dbAddress, dbOrder.orderNo),
                                             {transaction: t}).then((function(dbOrderAddress){
-                                            return OrderHistory.create(history.generate(dbOrder.id),
+                                            return OrderHistory.create(history.generate(dbOrder.orderNo),
                                                 {transaction: t}).then((function(dbOrderHistory) {
-                                                return OrderItems.bulkCreate(items.generate(pricedItems, dbOrder.id),
+                                                return OrderItems.bulkCreate(items.generate(pricedItems, dbOrder.orderNo),
                                                     {transaction: t}).then((function(dbOrderItem) {
 
                                                 }))

@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4
         },
         repairmanId:{
-            type:DataTypes.STRING,
+            type:DataTypes.INTEGER,
             required:true,
             unique: true
         }

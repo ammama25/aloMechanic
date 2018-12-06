@@ -16,7 +16,7 @@ module.exports = (sequelize, DataTypes) => {
         },
         type: {
             type: DataTypes.ENUM,
-            values: [1, 2, 3],
+            values: ['1', '2', '3'],
             required: true
         },
         description: {

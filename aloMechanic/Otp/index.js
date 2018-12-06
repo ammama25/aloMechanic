@@ -8,7 +8,6 @@ db.sequelize.sync().then(() => {
     console.log('OTP DB is connected');
 });
 
-
 const PATH = env.SERVER_ADDRESS;
 
 const createServer = function (bindPath, handler) {

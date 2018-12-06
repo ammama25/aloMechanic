@@ -9,7 +9,6 @@ db.sequelize.sync().then(() => {
     console.log('transportation DB is connected');
 });
 
-
 //const PATH = env.SERVER_ADDRESS;
 const PATH = '127.0.0.1:8090';
 

@@ -11,9 +11,6 @@ var env = require('./env');
 var sequelize = new _sequelize2.default(env.DATABASE_NAME, env.DATABASE_USERNAME, env.DATABASE_PASSWORD, {
     host: env.DATABASE_HOST,
     dialect: env.DATABASE_DIALECT,
-      dialectOptions: {
-        encrypt: true
-    },
     operatorsAliases ,
     define: {
         underscored: true
@@ -70,9 +67,9 @@ db.orderAddress = require('../server/models/orderAddress')(sequelize, _sequelize
 db.orderHistory = require('../server/models/orderHistory')(sequelize, _sequelize2.default);
 db.orderItem = require('../server/models/orderItem')(sequelize, _sequelize2.default);
 
-db.order.hasOne(db.orderAddress, {foreignKey: 'orderId' , sourceKey: 'id'})
-db.order.hasMany(db.orderHistory, {foreignKey: 'orderId' , sourceKey: 'id'})
-db.order.hasMany(db.orderItem, {foreignKey: 'orderId' , sourceKey: 'id'})
+db.order.hasOne(db.orderAddress, {foreignKey: 'orderId' , sourceKey: 'orderNo'})
+db.order.hasMany(db.orderHistory, {foreignKey: 'orderId' , sourceKey: 'orderNo'})
+db.order.hasMany(db.orderItem, {foreignKey: 'orderId' , sourceKey: 'orderNo'})
 
 
 
