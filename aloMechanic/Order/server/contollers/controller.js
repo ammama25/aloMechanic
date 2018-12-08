@@ -13,6 +13,7 @@ class orderAppHandler{
 
     placeOrder(call,callback) {
         items.get(call.request, function (itemsErr, pricedItems) {
+            
             if(!itemsErr){
                 order.generate(call.request, pricedItems, function (orderErr, generatedOrder) {
                     if(!orderErr){

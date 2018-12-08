@@ -28,10 +28,11 @@ message dbOrder {
     int32  discount               = 9 ;
     int32  transportPrice         = 10 ;
     int32  paidAmount             = 11 ;
-    string state                  = 12 ;
-    schduleData scheduling        = 13 ;
-    string address                = 14 ;
-    repeated orderItem orderItems = 15 ;
+    int32  workType               = 12 ;
+    string state                  = 13 ;
+    schduleData scheduling        = 14 ;
+    string address                = 15 ;
+    repeated orderItem orderItems = 16 ;
 }
 
 message schduleData {

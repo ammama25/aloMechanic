@@ -24,6 +24,9 @@ module.exports = (sequelize, DataTypes) => {
         },
         price:{
             type: DataTypes.INTEGER
+        },
+        workType:{
+            type: DataTypes.INTEGER
         }
     });
     return productService;

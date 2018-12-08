@@ -26,6 +26,8 @@ message responseItem {
     string servicePrice  = 5 ;
     string productPrice  = 6 ;
     string totalPrice    = 7 ;
+    int32  workTypeId    = 8 ;
+
 }
 
 message responseItems {
@@ -39,8 +41,9 @@ message carCategory {
 }
 
 message productService {
-    int32 productId = 1 ;
-    int32 serviceId = 2 ;
+    int32 productId  = 1 ;
+    int32 serviceId  = 2 ;
+    int32 workTypeId = 3 ;
 }
 
 message productServices {

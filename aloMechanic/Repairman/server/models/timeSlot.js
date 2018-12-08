@@ -1,22 +1,17 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-    const repairman = sequelize.define('repairman', {
+    const productService = sequelize.define('productService', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
             primaryKey: true,
         },
-        name: {
-            type: DataTypes.STRING,
+        time: {
+            type: DataTypes.ENUM,
+            values: [8, 10, 12,14,16,18],
             required: true
         },
-        workTypeId: {
-            type: DataTypes.STRING,
-            required: true
-
-        }
-
     });
-    return repairman;
+    return productService;
 };

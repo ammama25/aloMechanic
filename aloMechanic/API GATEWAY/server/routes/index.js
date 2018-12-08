@@ -11,6 +11,7 @@ import productandservice  from './productandservice';
 import order  from './order';
 
 
+
 const router = express.Router();
 
 // Adding first endpoint to server app
@@ -26,7 +27,6 @@ router.get('/api-status', (req, res) => {
         status: "ok"
     });
 });
-
 router.use('/customers', customer);
 router.use('/otp', otp);
 router.use('/login', login);

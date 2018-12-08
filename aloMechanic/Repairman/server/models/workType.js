@@ -1,7 +1,7 @@
 'use strict'
 
 module.exports = (sequelize, DataTypes) => {
-    const repairman = sequelize.define('repairman', {
+    const workType = sequelize.define('workType', {
         id: {
             type: DataTypes.INTEGER,
             autoIncrement: true,
@@ -11,12 +11,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             required: true
         },
-        workTypeId: {
-            type: DataTypes.STRING,
-            required: true
-
-        }
-
+   
     });
-    return repairman;
+    return workType;
 };

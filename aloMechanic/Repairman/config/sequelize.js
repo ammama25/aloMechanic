@@ -65,8 +65,8 @@ db.sequelize = sequelize;
 
 //Models/tables
 db.repairman         = require('../server/models/repairman')(sequelize, _sequelize2.default);
-db.repairmanCategory = require('../server/models/repairmanCategory')(sequelize, _sequelize2.default);
+db.workType          = require('../server/models/workType')(sequelize, _sequelize2.default);
 
-db.repairman.hasMany(db.repairmanCategory, {foreignKey: 'repairmanId' , sourceKey: 'id'})
+db.repairman.hasOne(db.workType, {foreignKey: 'workTypeId' , sourceKey: 'id'});
 
 module.exports = db;    

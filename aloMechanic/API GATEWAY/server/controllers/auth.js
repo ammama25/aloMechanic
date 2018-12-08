@@ -82,8 +82,11 @@ function validateOtpToken(req , res , next) {
 function validateLoginToken(req , res , next) {
     jwt.verify(req.headers.token, secret, function(err, decoded) {
         if(!err){
+            
             if (decoded.recieveFrom == 'login') {
+                console.log("tainja");
                 if(decoded.id == req.query.customerId || decoded.id == req.body.customerId) {
+                    console.log("tainja");
                     req.valiadte = "ok"
                     return next()
                 }

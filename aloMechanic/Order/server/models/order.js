@@ -52,7 +52,11 @@ module.exports = (sequelize, DataTypes) => {
         },
         assignTo: {
             type: DataTypes.INTEGER
-        }
+        },
+        workTypeId:{
+            type: DataTypes.INTEGER
+        },
+
     });
     return order;
 };

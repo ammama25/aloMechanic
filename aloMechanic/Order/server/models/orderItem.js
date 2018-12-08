@@ -36,6 +36,7 @@ module.exports = (sequelize, DataTypes) => {
             type: DataTypes.STRING,
             required: true
         }
+        
     });
     return orderItem;
 };

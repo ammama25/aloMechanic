@@ -14,8 +14,10 @@ class productandServiceAppHandler{
                     responseItem.servicePrice = service.price
                     productAndService.findOne({where:{id:responseItem.productId}}).then(product => {
                         try {
+
                             responseItem.productPrice = product.price
                             responseItem.totalPrice =  responseItem.productPrice +  responseItem.servicePrice + responseItem.categoryPrice
+                            responseItem.workTypeId = product.workTypeId ;
                         } catch (e) {
                             throw new Error("error in calculating total price in DB")
                         }

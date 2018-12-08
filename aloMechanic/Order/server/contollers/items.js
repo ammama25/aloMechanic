@@ -11,6 +11,7 @@ function get(obj , callback) {
         const Client = Package.productandservice_app_package.productandservice;
         const productServiceClinet = new Client(productServiceBindPath, grpc.credentials.createInsecure());
         var items = obj.orderItems;
+
         
         grpcSetup(vehicle ,function(Package){
             const Client = Package.CustomerVehicle_app_package.CustomerVehicleApp;
@@ -28,6 +29,9 @@ function get(obj , callback) {
                             callback(err , null)
                         }
                         else {
+
+
+
                             callback(null , pricedItems.responseItems)
                         }
                     })
@@ -39,6 +43,7 @@ function get(obj , callback) {
 }
 
 function generate(orderItems, orderId) {
+
     var result = orderItems
     for(var i=0;i<result.length;i++){
         result[i].orderId = orderId
@@ -46,4 +51,25 @@ function generate(orderItems, orderId) {
     return result
 }
 
-export default {get, generate}
+
+
+function workType_check(orderItems, orderworktype)
+{
+    var result = orderItems
+
+       for(var i=0;i<result.length;i++){
+
+       if(result[i].responseItem.workTypeId==orderworktype){
+           
+        return true
+       }
+       else{
+
+           return false
+       }
+    }
+
+
+}
+
+export default {get, generate, workType_check}
