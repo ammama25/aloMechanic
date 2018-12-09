@@ -37,6 +37,8 @@ function sendSMS(phoneNumber, code,callback) {
 
 
 
+    if(v)
+
     var sms  = "your code is : " + code ;
     console.log("-----------------------------------------------")
     console.log(code)
@@ -59,6 +61,7 @@ function sendSMS(phoneNumber, code,callback) {
 }
 
 function addRecord(phoneNumber , code , callback) {
+    
     otpRecord.create({
         mobileNo: phoneNumber ,
         code: code ,
@@ -110,13 +113,17 @@ class OtpAppHandler {
 
 
     validateCode(call , callback) {
+        var  main=ref_validation.validatephonenumber(call.request.mobileNo)
+        if(main)
+        {
         otpRecord.findOne({where: {mobileNo: call.request.mobileNo} }).then(record => {
             console.log(record.isUsed);
             if(record && record.isUsed==false){
+                console.log('omid',record.code );
                 if(record.code == call.request.code && record.expirationDate >= new Date()){
                     record.isUsed = true ;
                     record.save() ;
-                    console.log(record.code );
+                    console.log('omid',record.code );
                     console.log(record.isUsed);
                     callback(null ,{status:"ok"})
                 }
@@ -137,7 +144,12 @@ class OtpAppHandler {
 
             }
         )
+    }else{
+        callback(new Error ("unvalid mobile number"))
+        
+
     }
+}
 }
 
 export default OtpAppHandler;

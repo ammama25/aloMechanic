@@ -10,7 +10,6 @@ db.sequelize.sync().then(() => {
     console.log('Promotion DB is connected');
 });
 
-
 const PATH = env.SERVER_ADDRESS;
 
 const createServer = function (bindPath, handler) {

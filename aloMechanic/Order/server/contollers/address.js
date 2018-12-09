@@ -4,7 +4,6 @@ const customerBindPath       = env.CUSTOMER_SERVER_ADDRESS;
 const customerAddr           = './server/protos/Customer.proto';
 const grpc                   = require('grpc');
 
-
 function get(obj, callback) {
     grpcSetup(customerAddr ,function(Package){
         const Client = Package.customer_app_package.CustomerApp;

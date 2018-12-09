@@ -1,5 +1,3 @@
-import app from './config/express';
-import logger from './config/log4js';
 import env from './config/env/development';
 import db from './config/sequelize';
 const grpc = require('grpc');
@@ -10,7 +8,6 @@ const CustomerVehicleAppHandler = require('./server/controllers/customerVehicle'
 db.sequelize.sync().then(() => {
     console.log('Vehicle DB is connected');
 });
-
 
 const PATH = env.SERVER_ADDRESS;
 

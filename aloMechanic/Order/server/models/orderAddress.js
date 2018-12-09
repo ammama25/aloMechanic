@@ -8,7 +8,7 @@ module.exports = (sequelize, DataTypes) => {
             defaultValue: DataTypes.UUIDV4
         },
         orderId: {
-            type: DataTypes.UUID,
+            type: DataTypes.INTEGER,
             required: true
         },
         districtId: {

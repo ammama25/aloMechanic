@@ -8,11 +8,11 @@ export default {
     NODE_PORT: 3900,
     jwtSecret: 'mozi-amoo',
     jwtDuration: '30000 hours',
-    DATABASE_NAME: process.env.DATABASE_NAME || 'aloMechanic',
+    DATABASE_NAME: process.env.DATABASE_NAME || 'alomechanic',
     DATABASE_HOST: process.env.DATABASE_HOST || 'localhost',
     DATABASE_USERNAME: process.env.DATABASE_USERNAME || "ammama",
     DATABASE_PASSWORD: process.env.DATABASE_PASSWORD || "ammama",
-    DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'mssql' ,
+    DATABASE_DIALECT: process.env.DATABASE_DIALECT || 'mysql' ,
     SERVER_ADDRESS: '127.0.0.1:8088'
 };
 

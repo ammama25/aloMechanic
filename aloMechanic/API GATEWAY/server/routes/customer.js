@@ -26,4 +26,7 @@ router.route('/forgottPass')
 router.route('/getAllAddresses')
     .get(customer.getAllAddresses)
 
+router.route('/isRegisterd')
+	.post(customer.isRegisterd)
+
 export default router;

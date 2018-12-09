@@ -148,7 +148,24 @@ function getAllAddresses(req, res ,next) {
                 next(err);
             }
         )
-
 }
 
-export default{register ,update ,remove ,login ,registerAddress ,updateAddress ,getAllAddresses };
+function isRegisterd(req, res, next){
+     sequelize.query("SELECT * FROM customers " +
+        " WHERE mobileNo = :mobileNo and is_active = 1 " ,
+        { replacements: {mobileNo : req.body.mobileNo}, type: sequelize.QueryTypes.SELECT })
+        .then(customer => {
+            if(customer[0])
+                res.json(true)
+            else
+                res.json(false)
+        })
+        .catch(
+            function(err) {
+                console.log(err)
+                next(err);
+            }
+        )    
+}
+
+export default{register ,update ,remove ,login ,registerAddress ,updateAddress ,getAllAddresses ,isRegisterd};
