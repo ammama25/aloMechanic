@@ -34,11 +34,6 @@ function assignCode(phoneNumber , callback) {
 }
 
 function sendSMS(phoneNumber, code,callback) {
-
-
-
-    if(v)
-
     var sms  = "your code is : " + code ;
     console.log("-----------------------------------------------")
     console.log(code)
@@ -145,6 +140,7 @@ class OtpAppHandler {
             }
         )
     }else{
+        
         callback(new Error ("unvalid mobile number"))
         
 
