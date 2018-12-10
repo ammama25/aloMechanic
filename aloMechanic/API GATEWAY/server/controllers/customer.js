@@ -162,7 +162,7 @@ function isRegisterd(req, res, next){
         " WHERE mobileNo = :mobileNo and is_active = 1 " ,
         { replacements: {mobileNo : req.body.mobileNo}, type: sequelize.QueryTypes.SELECT })
         .then(customer => {
-            if(customer[0])
+            if(customer[0]  )
                 res.json(true)
             else
                 res.json(false)
