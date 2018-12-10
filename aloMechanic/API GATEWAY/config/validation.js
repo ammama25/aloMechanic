@@ -9,7 +9,7 @@ class validation
     validatephonenumber(inputtxt) {
       console.log(inputtxt);
         var phoneno = /^[0][9][0-9][0-9]{8,8}$/;
-        if(inputtxt)
+        if(inputtxt == null)
         {
         var tst= inputtxt.match(phoneno);
         console.log(tst)
@@ -25,7 +25,7 @@ class validation
 
        console.log("null");
        return false;
-       
+
       }
       };
 
