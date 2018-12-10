@@ -1,3 +1,5 @@
+import { sequelize } from '../../config/sequelize';
+
 const db = require('../../config/sequelize');
 const env = require('../../config/env/development')
 const validation =require("../../config/validation")
@@ -34,7 +36,7 @@ function assignCode(phoneNumber , callback) {
 }
 
 function sendSMS(phoneNumber, code,callback) {
-    
+
     var sms  = "your code is : " + code ;
     console.log("-----------------------------------------------")
     console.log(code)
@@ -110,20 +112,39 @@ class OtpAppHandler {
 
     validateCode(call , callback) {
         var  main=ref_validation.validatephonenumber(call.request.mobileNo)
+
         if(main)
         {
-        otpRecord.findOne({where: {mobileNo: call.request.mobileNo} }).then(record => {
-            console.log(record.isUsed);
-            if(record && record.isUsed==false){
-                console.log('omid',record.code );
-                if(record.code == call.request.code && record.expirationDate >= new Date()){
-                    record.isUsed = true ;
-                    record.save() ;
-                    console.log('omid',record.code );
-                    console.log(record.isUsed);
+        otpRecord.findAll({where: {mobileNo: call.request.mobileNo}}).then(record => {
+
+            var second=0;
+            var number=0;
+            for (var i = 0; i < record.length; i++) { 
+
+                        if(second < record[i].created_at.getTime()/1000)
+                        {
+                            second=record[i].created_at.getTime()/1000;
+                            number=i;
+                        }
+
+                console.log("omid",second,"    //",number);   
+              
+            }
+                console.log(number,record[number]);
+
+            if(record[number] && record[number].isUsed == false){
+                        console.log("tainja");
+                        console.log(record[number].code);
+                if(record[number].code == call.request.code && record[number].expirationDate >= new Date()){
+                    record[number].isUsed = true ;
+                    record[number].save() ;
+                    console.log('/////////////////////////',number);
+                    console.log('omiddddddddddddddddd',record[number].code );
+                    console.log(record[number].isUsed);
                     callback(null ,{status:"ok"})
                 }
                 else {
+
                     callback(new Error ("wrong code") ,{status:"wrong code"})
                 }
             }
