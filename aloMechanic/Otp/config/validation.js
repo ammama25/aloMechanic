@@ -1,3 +1,4 @@
+import { error } from "util";
 
 ///validation---Model 
 
@@ -8,6 +9,8 @@ class validation
     validatephonenumber(inputtxt) {
       console.log(inputtxt);
         var phoneno = /^[0][9][0-9][0-9]{8,8}$/;
+        if(inputtxt)
+        {
         var tst= inputtxt.match(phoneno);
         console.log(tst)
         if(tst){
@@ -17,8 +20,13 @@ class validation
           console.log("message");
           return false;
         }
-      };
+      }
+      else{
 
+       console.log("null");
+        return false;
+      };
+    }
 
 
        validateEmail(email) 
@@ -34,9 +42,29 @@ class validation
             return false;
           }
 
+
+     
         
       }     
 
+
+     
+
+      // null_chekker(data)
+      // {
+      //   console.log("nullchekker");
+      //   console.log(data);
+
+      //       for (var member in data) {
+
+      //         if (data[member] == null)
+      //         {
+      //             throw new Error("fill the fields")
+      //         }
+                  
+      //             }
+
+      // }
 
 
 

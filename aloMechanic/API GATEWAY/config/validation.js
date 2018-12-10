@@ -1,3 +1,4 @@
+import { error } from "util";
 
 ///validation---Model 
 
@@ -8,6 +9,8 @@ class validation
     validatephonenumber(inputtxt) {
       console.log(inputtxt);
         var phoneno = /^[0][9][0-9][0-9]{8,8}$/;
+        if(inputtxt)
+        {
         var tst= inputtxt.match(phoneno);
         console.log(tst)
         if(tst){
@@ -17,6 +20,12 @@ class validation
           console.log("message");
           return false;
         }
+      }
+      else{
+
+       console.log("null");
+       throw new error;
+      }
       };
 
 
