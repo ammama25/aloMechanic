@@ -24,7 +24,8 @@ class validation
       else{
 
        console.log("null");
-       throw new error;
+       return false;
+       
       }
       };
 
