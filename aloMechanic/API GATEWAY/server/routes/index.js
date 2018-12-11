@@ -1,4 +1,4 @@
-import express from 'express';
+
 import customer from './customer';
 import otp from './otp';
 import login from './login';
@@ -9,6 +9,12 @@ import promotion  from './promotion';
 import transportation from './transportation';
 import productandservice  from './productandservice';
 import order  from './order';
+
+var express = require('express')
+var cors = require('cors')
+var app = express()
+ 
+app.use(cors())
 
 
 
