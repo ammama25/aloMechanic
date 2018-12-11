@@ -1,4 +1,4 @@
-
+import express from '../../config/express'
 import customer from './customer';
 import otp from './otp';
 import login from './login';
@@ -11,16 +11,6 @@ import productandservice  from './productandservice';
 import order  from './order';
 var express = require('express')
 
-var app = express()
- 
-  app.get('/', function(req, res, next) {
-    // Handle the get for this route
-  });
-  
-  app.post('/', function(req, res, next) {
-   // Handle the post for this route
-  });
-  
 
 const router = express.Router();
 
