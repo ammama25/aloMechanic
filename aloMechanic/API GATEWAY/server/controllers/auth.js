@@ -27,7 +27,6 @@ if(req.body.mobileNo){
 }
 else{
         throw new error("validation error");
-
 }
  
 }
