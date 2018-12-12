@@ -45,6 +45,9 @@ function login(req, res ,next) {
             }
             else {
                 req.body.id = customer.id
+                req.body.firstname = customer.firstname
+                req.body.lastname = customer.lastname
+                req.body.email = customer.email
                 console.log(customer);
                 next()
             }
@@ -155,6 +158,7 @@ function getAllAddresses(req, res ,next) {
 
 function isRegisterd(req, res, next){
     var  main=ref_validation.validatephonenumber(req.mobileNo)
+   
     if(main)
     {
 

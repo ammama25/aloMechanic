@@ -28,5 +28,3 @@ const createServer = function (bindPath, handler) {
 
 createServer(PATH, new CustomerAppHandler);
 
-
-// export default app;

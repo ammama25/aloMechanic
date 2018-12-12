@@ -4,8 +4,13 @@ syntax = "proto3";
 package order_app_package;
 
 service orderApp {
-    rpc placeOrder (order) returns (dbOrder) {}
-
+    rpc placeOrder         (order)              returns (dbOrder) {}
+    rpc assignRepairman    (repairmanOrderDate) returns (status)  {}
+    rpc repairmanConfirmed (repairmanOrder)     returns (status)  {}
+    rpc reapirmanRejected  (repairmanOrder)     returns (status)  {}
+    rpc customerCanceled   (cancelMess)         returns (status)  {}
+    rpc orderCompliting    (repairmanOrder)     returns (status)  {}
+    rpc orederCompleted    (completeMess)       returns (status)  {}
 }
 
 message order {
@@ -44,11 +49,36 @@ message schduleData {
 
 message orderItem {
     string categoryId    = 1 ;
-    string serviceId    = 2 ;
-    string productId    = 3 ;
+    string serviceId     = 2 ;
+    string productId     = 3 ;
     int32  categoryPrice = 4 ;
-    int32  servicePrice = 5 ;
-    int32  productPrice = 6 ;
-    int32  totalPrice   = 7 ;
+    int32  servicePrice  = 5 ;
+    int32  productPrice  = 6 ;
+    int32  totalPrice    = 7 ;
 }
 
+message repairmanOrderDate {
+    string repairmanId     = 1 ;
+    string orderId         = 2 ;
+    schduleData scheduling = 3 ;
+}
+
+message repairmanOrder {
+    string repairmanId     = 1 ;
+    string orderId         = 2 ;
+}
+
+message cancelMess {
+    string orderId    = 1 ;
+    string customerId = 2 ;
+}
+
+message completeMess {
+    string repairmanId = 1 ;
+    string orderId     = 2 ;
+    string code        = 3 ;
+}
+
+message status {
+    string status = 1 ;
+}

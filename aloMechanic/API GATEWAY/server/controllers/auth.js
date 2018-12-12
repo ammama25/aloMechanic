@@ -33,9 +33,7 @@ else{
 }
 
 function generateLoginToken(req, res, next) {
-    if(req.body.id)
-    {
-
+    if(req.body.id) {
         const jwtPayload = {
             id : req.body.id ,
             mobileNo : req.body.mobileNo,
@@ -49,7 +47,7 @@ function generateLoginToken(req, res, next) {
         };
     
         var token = jwt.sign(jwtPayload, secret, jwtData);
-        res.json(token);
+        res.json({token ,jwtPayload});
 
     }
     else{
@@ -81,12 +79,9 @@ function validateOtpToken(req , res , next) {
 
 function validateLoginToken(req , res , next) {
     jwt.verify(req.headers.token, secret, function(err, decoded) {
-        if(!err){
-            
+        if(!err){ 
             if (decoded.recieveFrom == 'login') {
-                console.log("tainja");
                 if(decoded.id == req.query.customerId || decoded.id == req.body.customerId) {
-                    console.log("tainja");
                     req.valiadte = "ok"
                     return next()
                 }

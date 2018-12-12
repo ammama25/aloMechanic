@@ -67,7 +67,7 @@ function generate(obj, orderItems, callback) {
                         discount        : discount.amount ,
                         transportPrice  : transportPrice.amount ,
                         totalPrice      : parseInt(grossAmount) + parseInt(transportPrice.amount) - parseInt(discount.amount) ,
-                        state           : "new",
+                        state           : "10",
                         scheduleDate    : obj.scheduling.date ,
                         scheduleFrom    : obj.scheduling.from,
                         scheduleThrough : obj.scheduling.through
@@ -78,4 +78,8 @@ function generate(obj, orderItems, callback) {
     })
 }
 
-export default {generate}
+function update(){
+
+}
+
+export default {generate, update}

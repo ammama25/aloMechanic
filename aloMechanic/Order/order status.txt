@@ -1,0 +1,8 @@
+order status
+
+10) waiting for operator confirmation
+20) waiting for repairman confirmation
+30) waiting for handling
+40) order compliting 
+50)	order complited
+60) order canceled
