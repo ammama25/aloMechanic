@@ -157,11 +157,14 @@ function getAllAddresses(req, res ,next) {
 }
 
 function isRegisterd(req, res, next){
+<<<<<<< HEAD
     var  main=ref_validation.validatephonenumber(req.mobileNo)
    
     if(main)
     {
 
+=======
+>>>>>>> 9de00b24f0f8fc75c17bbecd8d3f3b61577fd58a
      sequelize.query("SELECT * FROM customers " +
         " WHERE mobileNo = :mobileNo and is_active = 1 " ,
         { replacements: {mobileNo : req.body.mobileNo}, type: sequelize.QueryTypes.SELECT })
@@ -177,10 +180,7 @@ function isRegisterd(req, res, next){
                 next(err);
             }
         )    
-}
-else{
-        next(err);
-}
+
 }
 
 export default{register ,update ,remove ,login ,registerAddress ,updateAddress ,getAllAddresses ,isRegisterd};

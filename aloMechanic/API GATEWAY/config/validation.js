@@ -25,7 +25,7 @@ class validation
 
        console.log("null");
        return false;
-       
+
       }
       };
 

@@ -20,8 +20,7 @@ class validation
           console.log("message");
           return false;
         }
-      }
-      else{
+      }else{
 
        console.log("null");
         return false;
