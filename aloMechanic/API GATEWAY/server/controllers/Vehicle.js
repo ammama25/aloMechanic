@@ -152,12 +152,12 @@ function getCustomerVehicle(req, res ,next)
 {
     sequelize.query("SELECT  Customer.firstname ,Customer.lastname,brand.name ," +
         " Customervehicle.plateNo,Customervehicle.color,Customervehicle.mileage,model.name " +
-        " FROM dbo.CustomerVehicles Customervehicle" +
-        " JOIN dbo.customers Customer "+
+        " FROM CustomerVehicles Customervehicle" +
+        " JOIN customers Customer "+
         " ON Customer.id = Customervehicle.customerId and Customer.id = :cid "+
-        " JOIN dbo.vehicles vehicle ON vehicle.id = Customervehicle.vehicleId  " +
-        " JOIN dbo.models model ON model.id = vehicle.modelId " +
-        " JOIN dbo.brands brand ON brand.id = vehicle.brandId " ,
+        " JOIN vehicles vehicle ON vehicle.id = Customervehicle.vehicleId     " +
+        " JOIN models model ON model.id = vehicle.modelId " +
+        " JOIN brands brand ON brand.id = vehicle.brandId " ,
         {replacements: {cid : req.query.customerId},type: sequelize.QueryTypes.SELECT })
         .then(Customervehicle => {
             console.log(Customervehicle)
