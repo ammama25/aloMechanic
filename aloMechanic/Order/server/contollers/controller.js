@@ -2,7 +2,10 @@ const address                = require('./address')
 const order                  = require('./order')
 const history                = require('./history')
 const items                  = require('./items')
+const finishCode             = require('./finishCode')
 const db                     = require('../../config/sequelize');
+const validation             = require("../../config/validation")
+const finishCodeRecord       = db.finishCodeRecord;
 const sequelize              = db.sequelize ;
 const Order                  = db.order;
 const OrderAddress           = db.orderAddress;
@@ -114,7 +117,7 @@ class orderAppHandler{
     }
 
     customerCanceled(call, callback){
-         OrderHistory.find({ where: { orderId: call.request.orderId } })
+        OrderHistory.find({ where: { orderId: call.request.orderId } })
             .on('success', function (orderHistory) {
             if (orderHistory.state == "10" || orderHistory.state == "20" || orderHistory.state == "30") {
                 orderHistory.updateAttributes({
@@ -131,11 +134,86 @@ class orderAppHandler{
     }
 
     orderCompliting(call, callback){
-        
+        finishCode.assign(call.request.mobileNo ,function (code) {
+            finishCode.sendSMS(call.request.mobileNo ,code , function(status){
+                var  main=ref_validation.validatephonenumber(call.request.mobileNo)
+                if(main) {
+                    if(status == 200) {
+                        finishCode.addRecord(call.request.repairmanId , code , function (result , error) {
+                            if(!error){
+                                OrderHistory.find({ where: { orderId: call.request.orderId } })
+                                    .on('success', function (orderHistory) {
+                                    if (orderHistory.state == "30") {
+                                        orderHistory.updateAttributes({
+                                            state     : "40",
+                                            desc      : "sending sms to customer",
+                                            updatedBy : "customer"
+                                        }).then(function (result) {
+                                            callback(null, {status:"Ok"})
+                                        }).catch(function (err) {
+                                            callback(err , {status:"err in compliting order maybe id is wrong"})
+                                        });  
+                                    }
+                                }) 
+                                callback(null ,{status:"sent"})
+                            }
+                            else
+                                callback(error ,{status:"sent"})
+                        })
+                    }
+                    else {
+                        callback(null ,{status:"sms not sent"})
+                    }
+                }
+                else{
+                    callback(new Error ("unvalid mobile number"))     
+                }
+            });
+        })
     }
 
     orederCompleted(call, callback){
-
+        finishCodeRecord.findAll({where: {repairmanId: call.request.repairmanId}}).then(record => {
+            var second=0;
+            var number=0;
+            for (var i = 0; i < record.length; i++) { 
+                if(second < record[i].created_at.getTime()/1000){
+                    second=record[i].created_at.getTime()/1000;
+                    number=i;
+                }
+            }
+            if(record[number] && record[number].isUsed == false){
+                if(record[number].code == call.request.code){
+                    record[number].isUsed = true ;
+                    record[number].save() ;
+                     OrderHistory.find({ where: { orderId: call.request.orderId } })
+                        .on('success', function (orderHistory) {
+                        if (orderHistory.state == "40") {
+                            orderHistory.updateAttributes({
+                                state     : "50",
+                                desc      : "order complited",
+                                updatedBy : "repairman"
+                            }).then(function (result) {
+                                callback(null, {status:"Ok"})
+                            }).catch(function (err) {
+                                callback(err , {status:"err in order maybe id is wrong"})
+                            });  
+                        }
+                    })
+                }
+                else {
+                    callback(new Error ("wrong code") ,{status:"wrong code"})
+                }
+            }
+            else  {
+                callback(new Error ("wrong  repairmanId "),{status:"invalid repairmanId"})
+            }
+        }).catch(
+            function(err){
+                console.log(err);
+                callback(err, null)
+            }
+        )
     }
 }
 

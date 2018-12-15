@@ -9,7 +9,7 @@ service orderApp {
     rpc repairmanConfirmed (repairmanOrder)     returns (status)  {}
     rpc reapirmanRejected  (repairmanOrder)     returns (status)  {}
     rpc customerCanceled   (cancelMess)         returns (status)  {}
-    rpc orderCompliting    (repairmanOrder)     returns (status)  {}
+    rpc orderCompliting    (sendingSms)         returns (status)  {}
     rpc orederCompleted    (completeMess)       returns (status)  {}
 }
 
@@ -66,6 +66,12 @@ message repairmanOrderDate {
 message repairmanOrder {
     string repairmanId     = 1 ;
     string orderId         = 2 ;
+}
+
+message sendingSms {
+    string repairmanId     = 1 ;
+    string orderId         = 2 ;
+    string mobileNo        = 3 ;
 }
 
 message cancelMess {

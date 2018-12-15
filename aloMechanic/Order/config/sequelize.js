@@ -66,6 +66,7 @@ db.order = require('../server/models/order')(sequelize, _sequelize2.default);
 db.orderAddress = require('../server/models/orderAddress')(sequelize, _sequelize2.default);
 db.orderHistory = require('../server/models/orderHistory')(sequelize, _sequelize2.default);
 db.orderItem = require('../server/models/orderItem')(sequelize, _sequelize2.default);
+db.finishCodeRecord = require('../server/models/finishCodeRecord')(sequelize, _sequelize2.default);
 
 db.order.hasOne(db.orderAddress, {foreignKey: 'orderId' , sourceKey: 'orderNo'})
 db.order.hasMany(db.orderHistory, {foreignKey: 'orderId' , sourceKey: 'orderNo'})
