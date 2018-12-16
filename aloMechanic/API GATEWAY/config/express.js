@@ -8,6 +8,8 @@ import bodyParser from 'body-parser';
 import expressValidation from 'express-validation';
 import routes from '../server/routes';
 import logger from './log4js';
+var cors = require('cors');
+
 
 const logRoot = path.join(__dirname, '../../log');
 const logDirectory = logRoot + '/requests';
@@ -41,6 +43,9 @@ morgan.token('id', function getId (req) {
 
 // creating express instance
 const app = express();
+app.use(cors());
+
+
 
 
 app.use(assignId)
