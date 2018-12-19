@@ -6,7 +6,7 @@ const router = express.Router();
 
 //auth.validateOtpToken
 router.route('/')
-    .post(auth.validateOtpToken,customer.register)
+    .post(auth.validateOtpToken, customer.register, auth.generateLoginToken)
 
 router.route('/update')
     .put(auth.validateLoginToken,customer.update)

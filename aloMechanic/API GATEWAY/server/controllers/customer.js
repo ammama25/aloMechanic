@@ -25,7 +25,11 @@ function register(req,res,next) {
                 next(err)
             }
             else {
-                return res.json(customer);
+                req.body.id = customer.id
+                req.body.firstname = customer.firstname
+                req.body.lastname = customer.lastname
+                req.body.email = customer.email
+                next()
             }
         })
     });
