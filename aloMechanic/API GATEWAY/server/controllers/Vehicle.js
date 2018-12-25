@@ -178,8 +178,7 @@ function getCustomerVehicle(req, res ,next)
 }
 
 
-function getallvehicle(req,res,next)
-{
+function getallvehicle(req,res,next){
     sequelize.query("SELECT model.name ,brand.name , " +
     " vehicle.type as type, vehicle.year as year  " +
     " FROM dbo.vehicles vehicle " +
@@ -197,11 +196,54 @@ function getallvehicle(req,res,next)
             next (err)
 
         }
-
-
     )
-
-
 }
 
-export default{registerCustomerVehicle ,update ,remove ,getCustomerVehicle,getallvehicle};
+function getAllBrands(req,res,next){
+    sequelize.query("SELECT id , name " +
+    " FROM Brands Brands ",
+    {type: sequelize.QueryTypes.SELECT })
+    .then(Brands => {
+        console.log(Brands)
+        res.json(Brands)
+    }).catch( function(err) {
+            console.log*(err);
+            next (err) 
+        }
+    )
+}
+
+function getModels(req,res,next){
+    sequelize.query("SELECT Models.id, Models.name " +
+    " FROM vehicles vehicle " +
+    " Join Models Models on Models.id = vehicle.modelId " +
+    " And vehicle.brandId = :bi ",
+    { replacements: {bi : req.query.brandId},type: sequelize.QueryTypes.SELECT })
+    .then(models => {
+        console.log(models)
+        res.json(models)
+    }).catch( function(err) {
+            console.log*(err);
+            next (err) 
+        }
+    )
+}
+
+function getYears(req,res,next){
+    sequelize.query("SELECT vehicle.id, vehicle.year " +
+    " FROM vehicles vehicle " +
+    " Where vehicle.modelId = :mi  " +
+    " And vehicle.brandId = :bi " +
+    " And vehicle.is_active = 1",
+    { replacements: {bi : req.query.brandId , mi : req.query.modelId},type: sequelize.QueryTypes.SELECT })
+    .then(years => {
+        console.log(years)
+        res.json(years)
+    }).catch( function(err) {
+            console.log*(err);
+            next (err) 
+        }
+    )
+}
+
+export default{registerCustomerVehicle ,update ,remove ,getCustomerVehicle ,getallvehicle ,getAllBrands ,getModels ,getYears};
