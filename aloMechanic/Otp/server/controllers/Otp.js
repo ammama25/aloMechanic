@@ -48,7 +48,7 @@ function sendSMS(phoneNumber, code,callback) {
                 
         kavenegar.Send({
             message: sms,
-            sender: "100065995",
+            sender: "10004346",
             receptor: phoneNumber.toString()
         } , function(response, status) {
             console.log(response);
